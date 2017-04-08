@@ -1,0 +1,34 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx,subfig,hyperref}
+\usepackage{cite}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+% \usepackage[ngerman]{babel}
+
+\pagenumbering{roman}
+\title{CS280r Artificial Intelligence Project Proposal \\ \Large{Groupwork Meeting Mediation}}
+\author{Anna Sophie Hilgard and Nick Hoernle}
+
+\begin{document}
+\maketitle{}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.3}
+\pagenumbering{arabic}
+
+
+\section{Introduction, Motivation and Relation to Coursework}
+Given a group work setting, a moderator is interested in controlling the interaction of the group while not necessarily participating in the execution of the task at hand \cite{short2015towards}. We propose an online (google hangout, skype) meeting environment where an artificial agent is able to control the meeting to optimise for the flow and productivity of the meeting whilst still engaging the various group members.
+
+The setting of this project has many links to the AI coursework. Grosz et. al present the formalism of shared plans but do not elaborate on how humans and/or agents collectively agree upon these plans. Hutchins presents a case study on the formalised communication among the participants about a sailing ship. He clearly shows how the correct communication protocols allowed the team to function efficiently and adapt to a changing environment. Friedkin introduces the concept of group consensus and how the dependence on logical constraints affect the group decision. This project would rather tackle the problem of neutralising overly influential (load and outspoken) members of the group and encouraging participation by the quieter group members. The project may further extend the work done by Kamar et. al who design ways for an agent to decide when it is useful to help other members of the group with assigned tasks. In this case, the agent would have a very incomplete picture of what is being done (as the agent is not expected to comprehend the purposes of the meeting), but it should be in a position to infer enough information to assist in allowing the group to reach a consensus.
+
+
+\bibliography{proposal}
+\bibliographystyle{plain}
+
+\end{document}
