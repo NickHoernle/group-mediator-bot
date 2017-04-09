@@ -1,6 +1,7 @@
 .DS_Store
 **/*.aux
 **/*.bbl
+**/*.spl
 **/*.blg
 **/*.fdb_latexmk
 **/*.fls
