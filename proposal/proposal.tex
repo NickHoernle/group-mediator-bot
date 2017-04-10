@@ -126,17 +126,29 @@
 
 \section{Relation to CS280r Coursework}
 	\label{sec:coursework}
-	\citet{grosz2006dynamics} present the formalism of shared plans but do not elaborate on how humans and/or agents collectively agree upon these plans. \citet{hutchins1995cognition} presents a case study on the formalized communication among the participants about a sailing ship. He clearly shows how the correct communication protocols allowed the team to function efficiently and adapt to a changing environment. \citet{friedkin2016network} introduces the concept of group consensus and how the dependence on logical constraints affect the group decision. This project would rather tackle the problem of neutralizing overly influential (load and outspoken) members of the group and encouraging participation by the quieter/less-spoken group members. The project may further extend the work done by \citet{kamar2009incorporating} who design ways for an agent to decide when it is useful to help other members of the group with assigned tasks. In this case, the agent would have a very incomplete picture of what is being done (as the agent is not expected to comprehend the purposes of the meeting), but it should be in a position to infer enough information to assist in allowing the group to reach a consensus.
+	\citet{grosz2006dynamics} present the formalism of shared plans but do not elaborate on how humans and/or agents collectively agree upon these plans. \citet{hutchins1995cognition} presents a case study on the formalized communication among the participants about a sailing ship. He clearly shows how the correct communication protocols allowed the team to function efficiently and adapt to a changing environment. \citet{friedkin2016network} introduces the concept of group consensus and how the dependence on logical constraints affect the group decision. This project would rather tackle the problem of neutralizing overly influential (load and outspoken) members of the group and encouraging participation by the quieter/less-spoken group members. The project may further extend the work done by \citet{kamar2009incorporating} who design ways for an agent to decide when it is useful to help other members of the group with assigned tasks. In this case, the agent would have a very incomplete picture of what is being done (as the agent is not expected to comprehend the purposes of the meeting), but it should be in a position to infer enough information to assist in allowing the group to reach a consensus. \\
+	In developing the workflow for a given task or meeting, we will likely draw upon the task breakdown and crowdsourcing practices in \citet{hahn2016knowledge} and \citet{chilton2013cascade}. In particular, a meeting mediator will likely source relevant topics that participants believe should be addressed within a meeting (or else perhaps it is provided with a specific task breakdown or meeting agenda). The mediator system would then aggregate the relative importance of these topics, perhaps even having to determine if similar topics are the same, related, and/or nested. Then, as the meeting progresses, the mediator will require some vote-processing scheme. The system will likely be less complicated than those addressed in \citet{benade2016preference} and \citet{procaccia2016voting}, but we'll still be able to draw upon the concepts from these papers.
 
 \section{Division of Work}
 	\label{sec:requestedfeedback}
-	There is no explicit division of work as we will both tackle the relevant parts of the project as we progress through the project time-line. \textit{Rather put a project time line here?}
+	There is no explicit division of work as we will both tackle the relevant parts of the project as we progress through the project time-line. 
+	\begin{enumerate}
+		\item{}\textbf{Week 1: April 10-16 -} Work on developing the algorithms and ideal interface for the core contribution: a system that, given a task or a set of topics, can filter messages from participants to feature those that are most likely to lead to a resolution based on the feedback of meeting participants. If we time at the end, we would also work to develop a system that can generate the meeting agenda itself given topics elicited from participants. Begin looking into Slack API	
+		\item{}\textbf{Week 2: April 17-23 -} Implement Slack interface 
+		\item{}\textbf{Week 3: April 24-30 -} Testing and refinement of interface, project presentations
+		\item{}\textbf{Week 4: May 1-7 -} Development of project-related experiment and testing on friends/classmates to get possible results concerning effectiveness at task completion. Refinement of project paper, which we will have been adding to throughout the timeline.	
+	\end{enumerate}
 
 \section{Requested Feedback}
 	\label{sec:requestedfeedback}
+	\begin{itemize}
+		\item{}What interface would you be willing to interact with in a setting like this? 
+		\item{}Should we attempt to have the bot crowdsource the meeting agenda as well as manage feedback during the meeting? 
+		\item{}How would you develop the priority queue for messages - in particular, is there a concern regarding possible lack of cohesiveness if messages are delayed from when they were originally sent? And if so, does this just require reasonable adaptation by the users or is it too unnatural to accept?
+	\end{itemize}
 
 \section{References}
-\textit{Need some more useful references here}
+
 \bibliographystyle{elsarticle-num-names}
 \bibliography{proposal}
 
