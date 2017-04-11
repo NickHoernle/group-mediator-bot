@@ -26,6 +26,7 @@
 %%
 \documentclass[final,authoryear,11pt,times]{elsarticle}
 
+
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
 
@@ -55,6 +56,8 @@
 
 \usepackage{setspace}
 \onehalfspacing
+
+\usepackage{enumitem}
 
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
@@ -111,39 +114,41 @@
 
 \section{Introduction and Motivation}
 	\label{sec:introduction-motivation}
-	Given a group work setting, a moderator is interested in controlling the interaction of the group while not necessarily participating in the execution of the task at hand \citep{short2015towards}. We propose an on-line meeting environment where an artificial agent is able to control the meeting to optimize for the flow and productivity of the meeting whilst still engaging the various group members. The purpose of this project is to implement a `Slack bot' to test the effect that an influencing agent may have in a human group-meeting environment.
+	Given a groupwork setting, a moderator is interested in controlling the interaction of the group while not necessarily participating in the execution of the task at hand \citep{short2015towards}. We propose an online meeting environment where an artificial agent is able to control the meeting to optimize for the flow and productivity of the meeting whilst also aiming to engage the various group members. The purpose of this project is to implement a `Slack bot' to test the effect that an influencing agent may have in a human group-meeting environment.
 
-	\citet{matsuyama2015four} highlight the difficulty of maintaining the quality of interaction between a robot agent and a group, due to the difficulties presented in speech analysis of the individuals in the group. Constraining an experiment to an online environment helps to attach identity numbers to individuals but for the purposes of scope, we will further constrain this to a written, online communication forum. Thus to implement a feasible test, we constrain an implementation of the system to slack where easier text analysis can be conducted to facilitate a written group work meeting. The choice of slack is further due to the popularity of the tool in group code and business environments \citep{jeffrey2016scientists}\citep{lebeuf2017software}.
+	\citet{matsuyama2015four} highlight the difficulty of maintaining the quality of interaction between a robot agent and a group, due to the difficulties presented in speech analysis of the individuals in the group. Constraining an experiment to an online environment helps to attach an identity to individuals but for the purposes of scope, we will further constrain this to a written, online communication forum. Thus to implement a feasible test, we constrain an implementation of the system to slack where easier text analysis can be conducted to facilitate a written groupwork meeting. The choice of slack is further due to the popularity of the tool in group code development and business environments \citep{jeffrey2016scientists}\citep{lebeuf2017software}.
 
 \section{Questions of Interest}
 	\label{sec:question_o_i}
 	The successful completion of this project will tackle the following questions:
-	\begin{itemize}
+	\begin{itemize}[noitemsep]
 		\item Given a groupwork environment, can an assistant agent help to facilitate the meeting to increase the interaction of the participants and to optimize for the productivity of the meeting?
-		\item Are people amenable to having a meeting managed by an external facilitator?
-		\item What are the key considerations when introducing an agent into a human group work planning environment?
+		\item Are people amenable to having a meeting managed by an external (computerized) facilitator?
+		\item What are key considerations to account for when introducing an agent into a human groupwork planning environment?
 	\end{itemize}
 
+\pagebreak
 \section{Relation to CS280r Coursework}
 	\label{sec:coursework}
-	\citet{grosz2006dynamics} present the formalism of shared plans but do not elaborate on how humans and/or agents collectively agree upon these plans. \citet{hutchins1995cognition} presents a case study on the formalized communication among the participants about a sailing ship. He clearly shows how the correct communication protocols allowed the team to function efficiently and adapt to a changing environment. \citet{friedkin2016network} introduces the concept of group consensus and how the dependence on logical constraints affect the group decision. This project would rather tackle the problem of neutralizing overly influential (load and outspoken) members of the group and encouraging participation by the quieter/less-spoken group members. The project may further extend the work done by \citet{kamar2009incorporating} who design ways for an agent to decide when it is useful to help other members of the group with assigned tasks. In this case, the agent would have a very incomplete picture of what is being done (as the agent is not expected to comprehend the purposes of the meeting), but it should be in a position to infer enough information to assist in allowing the group to reach a consensus. \\
-	In developing the workflow for a given task or meeting, we will likely draw upon the task breakdown and crowdsourcing practices in \citet{hahn2016knowledge} and \citet{chilton2013cascade}. In particular, a meeting mediator will likely source relevant topics that participants believe should be addressed within a meeting (or else perhaps it is provided with a specific task breakdown or meeting agenda). The mediator system would then aggregate the relative importance of these topics, perhaps even having to determine if similar topics are the same, related, and/or nested. Then, as the meeting progresses, the mediator will require some vote-processing scheme. The system will likely be less complicated than those addressed in \citet{benade2016preference} and \citet{procaccia2016voting}, but we'll still be able to draw upon the concepts from these papers.
+	\citet{grosz2006dynamics} present the framework of shared plans but do not elaborate on how humans and/or agents collectively agree upon these plans. \citet{hutchins1995cognition} presents a case study on the formalized communication that is required for the sailors aboard their sail-ship. He demonstrates how the correct communication protocols allow the team to function efficiently and adapt to a changing environment. \citet{friedkin2016network} introduces the concept of group consensus and how the dependence on logical constraints affect the group decision. This project would rather tackle the problem of neutralizing overly influential (loud and outspoken) members of the group and rather encouraging participation by the quieter/less-spoken group members. Based on the work of \citet{kamar2009incorporating}, we will need to include heuristics for when it is appropriate to interrupt a meeting with relevant information and when it is rather appropriate to let a discussion occur. It is important to note that, the agent would have an incomplete picture of what is being done as the agent is not expected to comprehend the purposes of the meeting. However, it should be in a position to infer enough information about the group members and about the progress of the meeting to assist in allowing the group to reach a consensus.
+	\par{}
+	In developing the workflow for a given task or meeting, we will likely draw upon the task breakdown and crowdsourcing practices in \citet{hahn2016knowledge} and \citet{chilton2013cascade}. Concretely, a mediator will need to source relevant topics that participants believe should be addressed within a meeting. Following this direction of work, the mediator is required to determine which topics are similar, related, and/or nested and thereby present a feasible meeting plan by ranking the relevance of the individual topics. Lastly, as the meeting progresses, the mediator will require a vote-processing scheme (to rank the contributions of fellow group members). The system will likely be less complicated than those addressed in \citet{benade2016preference} and \citet{procaccia2016voting}, but we'll still be able to draw upon the concepts from these papers.
 
 \section{Division of Work}
 	\label{sec:requestedfeedback}
 	There is no explicit division of work as we will both tackle the relevant parts of the project as we progress through the project time-line. 
-	\begin{enumerate}
-		\item{}\textbf{Week 1: April 10-16 -} Work on developing the algorithms and ideal interface for the core contribution: a system that, given a task or a set of topics, can filter messages from participants to feature those that are most likely to lead to a resolution based on the feedback of meeting participants. If we time at the end, we would also work to develop a system that can generate the meeting agenda itself given topics elicited from participants. Begin looking into Slack API	
-		\item{}\textbf{Week 2: April 17-23 -} Implement Slack interface 
-		\item{}\textbf{Week 3: April 24-30 -} Testing and refinement of interface, project presentations
-		\item{}\textbf{Week 4: May 1-7 -} Development of project-related experiment and testing on friends/classmates to get possible results concerning effectiveness at task completion. Refinement of project paper, which we will have been adding to throughout the timeline.	
+	\begin{enumerate}[noitemsep]
+		\item{}\textbf{Week 1 (April 10-16):} Develop the algorithms and ideal interface for the core contribution: a system that, given a task or a set of topics, can filter messages from participants to feature those that are most likely to lead to a resolution based on the feedback of meeting participants. Begin using the Slack API. \textit{Additional scope: develop a system that can generate the meeting agenda itself given topics elicited from participants.}
+		\item{}\textbf{Week 2 (April 17-23):} Implement Slack interface.
+		\item{}\textbf{Week 3 (April 24-30):} Testing and refinement of interface. Project presentations.
+		\item{}\textbf{Week 4 (May 1-7):} Development of project-related experiment and testing on friends/classmates to get possible results concerning effectiveness at task completion. Refinement of project paper, which we will have been drafting throughout the timeline.	
 	\end{enumerate}
 
 \section{Requested Feedback}
 	\label{sec:requestedfeedback}
-	\begin{itemize}
-		\item{}What interface would you be willing to interact with in a setting like this? 
-		\item{}Should we attempt to have the bot crowdsource the meeting agenda as well as manage feedback during the meeting? 
+	\begin{itemize}[noitemsep]
+		\item{}Should we attempt to have the bot crowdsource the meeting agenda as well as manage feedback during the meeting?
+		\item{}Is a text based meeting environment useful in terms of a case-study for a larger mediating agent?
 		\item{}How would you develop the priority queue for messages - in particular, is there a concern regarding possible lack of cohesiveness if messages are delayed from when they were originally sent? And if so, does this just require reasonable adaptation by the users or is it too unnatural to accept?
 	\end{itemize}
 
