@@ -1,0 +1,126 @@
+%%
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%% SP 2008/03/01
+%%
+%%
+%%
+%% $Id: elsarticle-template-harv.tex 4 2009-10-24 08:22:58Z rishi $
+%%
+%%
+\documentclass[final,authoryear,11pt,times]{elsarticle}
+
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,authoryear,1p,times]{elsarticle}
+%% \documentclass[final,authoryear,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,authoryear,3p,times]{elsarticle}
+%% \documentclass[final,authoryear,3p,times,twocolumn]{elsarticle}
+
+%% \documentclass[final,authoryear,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+
+\usepackage[margin=1.25in]{geometry}
+\parskip=3pt
+
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{enumitem}
+
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon (default)
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   authoryear - selects author-year citations (default)
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%   longnamesfirst  -  makes first citation full author list
+%%
+%% \biboptions{longnamesfirst,comma}
+
+% \biboptions{}
+
+\journal{cs280r - Project Update}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{CS280r Project Update \\ Group Meeting Facilitation: Implementation of an Artificial Mediator}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Sophie Hilgard \& Nicholas Hoernle}
+% \begin{abstract}
+% %% Text of abstract
+
+% A paragraph that states (1) the problem addressed, (2) the specific approach taken, (3) the results of that approach, and (optionally) lessons learned. Note: Abstracts are not simply the first paragraph of the introduction.
+
+% \end{abstract}
+\end{frontmatter}
+
+\section{Update}
+We have decided to focus on the agenda setting goal from the project proposal. As the scope of this task is still fairly broad, after speaking to Barbara, we have decided to study a content generation platform that could in theory be applied to the meeting agenda setting. The power of crowd-sourcing is such that we are aiming to source opinions from the entire team due to the importance of including items in the agenda that reflect the needs of the individuals in the team \citep{schwartz2015design}.
+
+Specifically, we will be building on work from \citet{hahn2016knowledge} and \citep{caragiannis2017subset} to firstly curate and identify salient themes within a topic and thereafter select the correct subset that should be studied further (or included in a meeting agenda). As the meeting setting is highly qualitative and running a specific experiment may present difficulties, we have constrained the scope of this project to generating the most relevant subset of topics from a given news article. We will be using articles that attempt to persuade readers to a certain viewpoint. However, the arguments made are not necessarily equally convincing to all people and thus we are looking to select the optimal subset of logic that is required to formulate a convincing argument. To this end, we will use a content generation step, similar to what we saw in the Knowledge Accelerator where `team members' will be required to select relevant topics from the given article. We will then use two different voting rules to aggregate the opinions of the subjects to create the optimal subsets. The one voting rule will be based on the work by \citet{caragiannis2017subset} and one will be the naive approach of selecting whichever topics receive the highest number of votes in an approval voting setting (with ties broken at random). We can also compare this against a baseline of an individual creating a topic summary of the entire document.
+
+\bibliographystyle{elsarticle-num-names}
+\bibliography{update}
+
+\end{document}
+
+
+\end{document}
