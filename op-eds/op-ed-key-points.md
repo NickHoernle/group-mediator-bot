@@ -1,4 +1,4 @@
-# College Applications
+# College Applications:
 * Current admission guidelines for US colleges admissions offices fail to admit many top quality students.
 * Cumulative high school grade and ACT scores are widely used in the admissions process.
 * Cumulative high school grade and ACT scores are less predictive of student success than alternative measures.
@@ -15,7 +15,7 @@
 * Data science, as a tool that can be used to predict student success, is becoming more popular in certain colleges admissions life-cycles.
 * Most colleges are not applying statistical predictive techniques to enhance admissions.
 
-# Interview Foibles
+# Interview Foibles:
 * Circumstance may be highly misleading in an interview scenario.
 * An interviewee's demeanor may depend highly on external, hidden circumstances.
 * Interview conduct may be interpreted differently by different interviewers.
@@ -32,3 +32,22 @@
 * Interviews that are structured so that all candidates receive the same questions, have been shown to make interviews more predictive of future job success.
 * Interviews can rather be used to test job related skills.
 * Unstructured interviews are likely to remain a popular interviewing technique into the future.
+
+# Addiction to Interview Games:
+* Rhetoric stating that video games are addictive and them to drugs is misguided.
+* The World Health Organisation (WHO) has proposed to have video gaming included in its catalog of mental diseases.
+* Video gamining is not damaging or distuptive to one's life and thus should not be compared to a drug.
+* Dopamine, a neurotransmitter associated with pleasure, is released whilst playing video games.
+* Dopamine, a neurotransmitter associated with pleasure, is released whilst taking drugs.
+* Dopamine, a neurotransmitter associated with pleasure, is released whilst partaking in any form of pleasurable activity.
+* Dopamine levels that are released whilst playing video games are vastly lower than those released whilst taking a drug such as methamphetamine.
+* The fact that a pleasurable activity released dopamine is uninformative, any enjoyable activity should release this chemical in varying amounts.
+* American Journal of Psychiatry has published a study showing that at most 1 percent of video game players might exhibit characteristics of an addiction.
+* American Journal of Psychiatry has published a study showing that gambling is more addictive than video games.
+* American Journal of Psychiatry has published a study showing that patents who were possibly classified as addicted to gambling experienced negative outcomes from this addiction.
+* American Journal of Psychiatry has published a study showing that the mental and social heath of the video game addicts is no different from individuals who were not addicted to video games.
+* Treating the immoderate playing of video games as an addiction, is pathologizing relatively normal behavior.
+* We and our children are “addicted” to new technologies because, they improve our lives or are simply pleasurable.
+* Evidence for addiction to video games is virtually nonexistent.
+* Balancing technology use with exercise, proper sleep and the responsibilities we have in real life is very important.
+* Using video gaming to relax does not constitute an addiction in much the same way as watching sports is not addictive.
