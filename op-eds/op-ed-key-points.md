@@ -1,5 +1,9 @@
 # College Applications:
-*Topic description here*
+
+*Many people feel that USA college admissions are highly skewed toward outdated metrics. Recent research has uncovered metrics that are better able to predict students' future performance in college. However, colleges are reluctant to adopt these new metrics.*
+
+Rank the following points in terms of how relevant they are, relating to the above topic.
+
 Rank the following points of information in terms of relevance to the subject topic at hand.
 * Current admission guidelines for US colleges admissions offices fail to admit many top quality students.
 * Cumulative high school grade and ACT scores are widely used in the admissions process but are less predictive of student success than alternative measures.
@@ -16,6 +20,10 @@ Rank the following points of information in terms of relevance to the subject to
 
 
 # Interview Foibles:
+*The 'get to know you' styled interview is becoming a popular trend. However, research shows that humans are surprisingly bad at inferring essential qualities about an applicant's character.*
+
+Rank the following points in terms of how relevant they are, relating to the above topic.
+
 * Circumstance may be highly misleading in an interview scenario as an interviewee's demeanor may depend highly on external, hidden circumstances.
 * An interviewee's conduct may be interpreted differently by different interviewers.
 * Unstructured, 'get-to-know' interviews are becoming popular in the workspace and in college admissions and forms a is a poor metric for predicting future job performance
@@ -32,7 +40,10 @@ Rank the following points of information in terms of relevance to the subject to
 
 
 # Addiction to Video Games:
-*Rhetoric stating that video games are addictive and comparing them to drugs is misguided. The World Health Organisation (WHO) has proposed to have video gaming included in its catalog of mental diseases.*
+*Rhetoric stating that video games are addictive and comparing them to drugs is misguided. The World Health Organization (WHO) has proposed to have video gaming included in its catalog of mental diseases.*
+
+Rank the following points in terms of how relevant they are, relating to the above topic.
+
 * Video gaming is not damaging or disruptive to one's life and thus should not be compared to a drug.
 * Dopamine levels that are released whilst playing video games are vastly lower than those released whilst taking a drug such as methamphetamine.
 * The fact that a pleasurable activity released dopamine is uninformative, as dopamine is released whilst playing video games, taking drugs and whilst partaking in any form of pleasurable activity.
