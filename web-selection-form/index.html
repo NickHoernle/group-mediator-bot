@@ -1,0 +1,403 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Subset Selection Survey</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+        <style>
+            .sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+            .sortable li { margin: 1px 5px 5px 1px; padding: 2px; padding-left: 1.5em; font-size: 1.4em; }
+            /*#sortable li span { position: absolute; margin-left: -1.3em; }*/
+        </style>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <title>Crowdsourced Subset Selection</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+
+        <div class="container">
+            <div class="row">
+                <h1>Crowdsourced Subset Selection</h1>
+            </div>
+
+            <br />
+            <p style="font-size: medium">
+                Firstly, thank you for completing this questionnaire. Our names are Sophie and Nick, we are graduate students at Harvard in the School of Engineering and Applied Sciences. We are completing a small study on the role of Artificial Intelligence in a group and/or team environment and we'd really appreciate your input to help us collect some empirical data.
+                <br/>
+                <br/>
+                Thank you again for your time!
+            </p>
+            <hr />
+            <hr />
+
+            <div class="row">
+                <h4>Question 1:</h4>
+                <div class="well well-lg">
+                    <div class="question_description" id="question1_description">
+                    </div>
+                    <br />
+                    <ul id="question1_content">
+                      </ul>
+                </div>
+            </div>
+
+            <hr />
+            <hr />
+
+            <div class="row">
+                <h4>Question 2:</h4>
+                <div class="well well-lg">
+                    <div class="question_description" id="question2_description">
+                    </div>
+                    <br />
+                    <ul id="question2_content">
+                    </ul>
+                </div>
+            </div>
+
+            <hr />
+            <hr />
+
+            <div class="row">
+                <h4>Question 3:</h4>
+                <div class="well well-lg">
+                    <div class="question_description" id="question3_description">
+                    </div>
+                    <br />
+                    <ul id="question3_content">
+                    </ul>
+                </div>
+            </div>
+
+            <div style="padding-bottom: 10em;">
+                <button type="button" class="btn btn-lg btn-primary" id="submitButton">Submit</button>
+            </div>
+
+            <script>
+            var time_start = Date.now()
+            /**
+             * Randomize array element order in-place.
+             * Using Durstenfeld shuffle algorithm.
+             */
+            function shuffleArray(array) {
+                for (var i = array.length - 1; i > 0; i--) {
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+                return array;
+            }
+
+            function make_rank_question (question_data, question_div, answer_div, order) {
+
+                var newDiv = document.createElement( "div" );
+                var description = $(newDiv).append(question_data['question_description']);
+
+                description.append(' ');
+                description.append(question_data['question']['rank']);
+
+                var paragraph = $(question_div);
+                paragraph.css('font-size', 'large');
+                paragraph.append(description)
+
+                var questions = $(answer_div)
+
+                questions.addClass("sortable")
+                questions.sortable({
+
+                    update: function(e, ui) {
+
+                        var new_order = $(this).find('li').map(function(i, item){ return $(item).data('order'); }).get();
+
+                        var changed_order = new_order.map(function(i, j) { return order[i-1] });
+
+                        $(question_div).empty()
+                        $(answer_div).empty()
+                        make_rank_question(question_data, question_div, answer_div, changed_order)
+
+                    }
+
+                });
+
+                questions.sortable();
+                questions.disableSelection();
+
+                for (var i in order) {
+
+                    var answer = question_data['answers'][order[i]]
+
+                    var item = $(document.createElement( "li" ))
+                    item.addClass("btn btn-default");
+                    item.css('float', 'none');
+                    item.css('white-space', 'normal')
+                    item.css('padding', '10px');
+                    item.css('width', 'inherit');
+                    item.css('text-align', 'left');
+                    item.css('font-size', 'small');
+
+                    var span = $(document.createElement("tr"));
+                    span.css('text-align', 'left')
+
+                    var col = $(document.createElement("td"))
+                    col.css('padding', '1px');
+                    col.css('padding-right', '5px');
+
+                    var badge =  $(document.createElement("span"));
+                    badge.addClass('badge');
+                    item.data({'order': parseInt(i) + 1})
+                    item.data({'value': order[i]})
+                    badge.text($(item).data('order'))
+
+                    col.append(badge);
+                    span.append(col);
+                    var text = $(document.createElement("span")).append(answer)
+                    span.append(text)
+                    item.append(span)
+                    questions.append(item);
+
+                }
+
+//                questions.append('<p>(<i>Drag and drop the options into the best order</i>)</p>')
+
+            }
+
+            function make_select_question (question_data, question_div, answer_div, order) {
+
+                var newDiv = document.createElement( "div" );
+                var description = $(newDiv).append(question_data['question_description']);
+                description.append(' ');
+                description.append(question_data['question']['select']);
+
+                var paragraph = $(question_div);
+                paragraph.css('font-size', 'large');
+                paragraph.append(description)
+
+                var questions = $(answer_div)
+
+                var selected = []
+                $(questions).data({'selected' : []})
+
+                for (var i in order) {
+
+                    var answer = question_data['answers'][order[i]]
+
+                    var item = $(document.createElement( "li" ))
+                    item.css('list-style-type', 'none')
+                    item.css('white-space', 'normal')
+                    item.css('margin', '0')
+                    item.css('padding', '0')
+                    item.css('white-space', 'normal')
+                    item.css('float', 'none');
+                    item.css('padding', '10px');
+                    item.css('width', 'inherit');
+                    item.css('padding-left', '1.5em');
+                    item.css('font-size', 'medium');
+                    item.css('margin', '1px 5px 5px 1px')
+                    item.css('padding', '2px')
+                    item.css('padding-left', '1.5em')
+                    var span = $(document.createElement("tr"));
+                    span.addClass("input-group-addon")
+                    span.css('text-align', 'left')
+
+                    var col = $(document.createElement("td"))
+                    col.css('padding', '1px');
+                    col.css('padding-right', '5px');
+
+                    var checkbox =  $('<input type="checkbox" aria-label="...">');
+                    $(checkbox).data({'value': order[i]});
+                    $(checkbox).change(function() {
+
+                        var selected = $(questions).find('input:checkbox:checked').map( function() {
+                           return $(this).data('value');
+                        }).get()
+
+                        $(questions).data({'selected' : selected})
+
+                        if (selected.length > 5) {
+                            $(questions).find("#over_selection").remove()
+                            $(questions).append('<p id="over_selection" style="color: red"><i>Please select exactly 5 options</i></p>')
+                        } else {
+                            $(questions).find("#over_selection").remove()
+                        }
+                    });
+
+                    col.append(checkbox)
+
+                    span.append(col)
+                    var text = document.createElement('td');
+                    text.append(answer)
+                    span.append(text)
+                    span.css('white-space', 'normal')
+                    item.append(span)
+                    questions.append(item);
+
+
+                }
+            }
+
+            var selection1 = Math.floor((Math.random() * 2) + 1);
+            var selection2 = Math.floor((Math.random() * 2) + 1);
+            var selection3 = 2
+            if ((selection1 === 1) && (selection2 === 1)){
+                selection3 = 2
+            }else if (selection1 === 2 && selection2 === 2){
+                selection3 = 1
+            }else{
+                selection3 = Math.floor((Math.random() * 2) + 1);
+            }
+
+            question_mapping = Array.apply(null, {length: 3}).map(Number.call, Number).map(function(x) {return x+1})
+            question_mapping = shuffleArray(question_mapping)
+            console.log(question_mapping)
+
+            $.getJSON("data/questions.json", function(data) {
+
+                var question1_map = 'question' + question_mapping[0]
+                var order1 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
+                order1 = shuffleArray(order1)
+                var question1 = data[question1_map]
+                if (selection1 == 1){
+                    make_rank_question(question1, "#question1_description", "#question1_content", order1)
+                } else {
+                    make_select_question(question1, "#question1_description", "#question1_content", order1)
+                }
+
+                var question2_map = 'question' + question_mapping[1]
+                var order2 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
+                order2 = shuffleArray(order2)
+                var question2 = data[question2_map]
+                if (selection2 == 1){
+                    make_rank_question(question2, "#question2_description", "#question2_content", order2)
+                } else {
+                    make_select_question(question2, "#question2_description", "#question2_content", order2)
+                }
+
+                var question3_map = 'question' + question_mapping[2]
+                var order3 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
+                order3 = shuffleArray(order3)
+                var question3 = data[question3_map]
+                if (selection3 == 1){
+                    make_rank_question(question3, "#question3_description", "#question3_content", order3)
+                } else {
+                    make_select_question(question3, "#question3_description", "#question3_content", order3)
+                }
+
+            });
+
+            $('#submitButton').click( function() {
+
+                var ok_flag = 0
+                var question1_data
+                if (selection1 === 1){
+                    question1_data = $("#question1_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+                } else {
+                    question1_data = $("#question1_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+                    if (question1_data.length != 5) {
+                        alert('Please make 5 selections for the multiple choice question')
+                        ok_flag = 1
+                    }
+                }
+
+                var question2_data
+                if (selection2 === 1){
+                    question2_data = $("#question2_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+                } else {
+                    question2_data = $("#question2_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+                    if (question2_data.length != 5) {
+                        alert('Please make 5 selections for the multiple choice question')
+                        ok_flag = 1
+                    }
+                }
+
+                var question3_data
+                if (selection3 === 1){
+                    question3_data = $("#question3_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+                } else {
+                    question3_data = $("#question3_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+                    if (question3_data.length != 5) {
+                        alert('Please make 5 selections for the multiple choice question')
+                        ok_flag = 1
+                    }
+                }
+
+
+                if (ok_flag !== 1){
+
+                    var data = {}
+                    data['question' + question_mapping[0] + '_id'] = question_mapping[0];
+                    data['question' + question_mapping[1] + '_id'] = question_mapping[1];
+                    data['question' + question_mapping[2] + '_id'] = question_mapping[2];
+                    data['question' + question_mapping[0] + '_selections'] = question1_data
+                    data['question' + question_mapping[1] + '_selections'] = question2_data
+                    data['question' + question_mapping[2] + '_selections'] = question3_data
+                    data['question' + question_mapping[0] + '_type'] = selection1
+                    data['question' + question_mapping[1] + '_type'] = selection2
+                    data['question' + question_mapping[2] + '_type'] = selection3
+                    data['time_start'] = time_start
+                    data['time_end'] = Date.now()
+
+                    console.log(data)
+
+                    $.ajax ({
+                        type: "POST",
+                        url: 'https://54w56om3u3.execute-api.us-east-1.amazonaws.com/test',
+                        dataType: 'application/json',
+                        async: false,
+                        data: JSON.stringify(data),
+                        success: function () {
+
+                            alert("Thanks a lot! We appreciate it.");
+                            window.location = "http://www.google.com";
+                        },
+                        error: function() {
+                            alert("Thanks a lot! We appreciate it.");
+                            window.location = "http://www.google.com";
+                        }
+                    })
+                }
+            });
+
+        </script>
+
+
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+    </body>
+</html>
