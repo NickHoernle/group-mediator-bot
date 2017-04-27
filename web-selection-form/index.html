@@ -323,7 +323,7 @@
                     question1_data = $("#question1_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
                 } else {
                     question1_data = $("#question1_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if (question1_data.length != 5) {
+                    if (question1_data.length !== 5) {
                         alert('Please make 5 selections for the multiple choice question')
                         ok_flag = 1
                     }
@@ -334,7 +334,7 @@
                     question2_data = $("#question2_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
                 } else {
                     question2_data = $("#question2_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if (question2_data.length != 5) {
+                    if ((question2_data.length !== 5) && (flag === 0)) {
                         alert('Please make 5 selections for the multiple choice question')
                         ok_flag = 1
                     }
@@ -345,7 +345,7 @@
                     question3_data = $("#question3_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
                 } else {
                     question3_data = $("#question3_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if (question3_data.length != 5) {
+                    if ((question3_data.length !== 5) && (flag === 0)) {
                         alert('Please make 5 selections for the multiple choice question')
                         ok_flag = 1
                     }
