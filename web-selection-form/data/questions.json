@@ -3,13 +3,14 @@
         "question_description": "<i>Many people feel that USA college admissions are highly skewed toward outdated metrics. Recent research has uncovered metrics that are better able to predict students' future performance in college. However, colleges are reluctant to adopt these new metrics.</i><br/><br/>Imagine that you are in a debate and you are asked to support the argument that USA college admissions should change their admission metrics.",
         "question": {
             "rank": "<b>Rank the following points</b> from the most to the least useful for your argument (1 being the most, 10 being the least).",
-            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument."
+            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument.",
+            "number": "Give each point a <b>score from 1 to 10</b> in terms of how helpful it will be for your argument (1 being not helpful, 10 being very helpful)."
         },
         "answers": {
             "1": "Current admission guidelines for US colleges admissions offices result in the colleges failing to admit many top quality students.",
             "2": "Cumulative high school grade is widely used in the admissions process but grade point average (GPA) in senior years is more predictive of college success than high GPA in junior years.",
             "3": "Average ACT scores are widely used in college admissions but scores for only the Math and English sections are more predictive of student success in college.",
-            "4": "Research shows that a diverse student body can be obtained even with reweighted ACT scores.",
+            "4": "A diverse student body can be obtained even with reweighted ACT scores.",
             "5": "Schools should be unconcerned about brief fluctuations in college ranking scores (caused by different admissions criteria), if it results in a stronger student body.",
             "6": "Improved admissions, resulting in improved graduation rates, will show in world rankings four years after initial implementation.",
             "7": "There is currently an inherent disconnect between admissions offices and graduation rates (e.g. there is no direct feedback from graduation to the admissions decisions that were made four years prior).",
@@ -23,15 +24,16 @@
         "question_description": "<i>The 'get to know you' styled interview is becoming a popular trend. However, research shows that humans are surprisingly bad at inferring essential qualities about an applicant's character and thus may make poor judgments about the future success of an applicant.</i><br/><br/> Imagine that you are in a debate and that you are asked to argue in support of the motion above, that the current structure of interviews is not helpful in successful hiring practices.",
         "question": {
             "rank": "<b>Rank the following points</b> from the most to the least useful for your argument (1 being the most, 10 being the least).",
-            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument."
+            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument.",
+            "number": "Give each point a <b>score from 1 to 10</b> in terms of how helpful it will be for your argument (1 being not helpful, 10 being very helpful)."
         },
         "answers": {
             "1": "Circumstance may be highly misleading in an interview scenario as an interviewee's demeanor may depend highly on external, hidden circumstances.",
             "2": "An interviewee's conduct may be interpreted differently by different interviewers.",
             "3": "Unstructured, 'get-to-know' interviews are becoming popular in the workspace and in college admissions, yet these form a poor metric for predicting the future job performance of the interviewee.",
             "4": "Interviews can actually be harmful to the hiring process, undercutting the impact of other, more valuable information about interviewees.",
-            "5": "Research shows that students are better at predicting other students' GPA scores when no interview is conducted.",
-            "6": "Research has shown that when interviewees respond randomly to interview questions, the interviewer is unable to detect this trend.",
+            "5": "Students are better at predicting other students' GPA scores when no interview is conducted.",
+            "6": "When interviewees respond randomly to interview questions, the interviewer is unable to detect this trend.",
             "7": "When interviewees respond randomly to interview questions, the interviewer has a strong belief that she 'got to know' the interviewee (even though the responses have no bearing on the actual beliefs of the interviewee).",
             "8": "Interviewers naturally turn irrelevant information into a coherent narrative, biasing their conclusions.",
             "9": "Interviews that are structured so that all candidates receive the same questions, have been shown to make interviews more predictive of future job success.",
@@ -40,15 +42,16 @@
     },
 
     "question3":{
-        "question_description": "<i>The World Health Organization (WHO) has proposed to have video game addiction included in its catalog of mental diseases, but rhetoric stating that video games are addictive and comparing them to drugs is misguided.</i><br/><br/> Imagine that you are in a debate and that you are asked to support the statement that video games should not be classified as addictive. Select the 5 most relevant points that you would like you use in your argument.",
+        "question_description": "<i>The World Health Organization (WHO) has proposed to have video game addiction included in its catalog of mental diseases, but rhetoric stating that video games are addictive and comparing them to drugs is misguided.</i><br/><br/> Imagine that you are in a debate and that you are asked to support the statement that video games should not be classified as addictive.",
         "question": {
             "rank": "<b>Rank the following points</b> from the most to the least useful for your argument (1 being the most, 10 being the least).",
-            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument."
+            "select": "<b>Select the 5 most relevant points</b> that you would like you use in your argument.",
+            "number": "Give each point a <b>score from 1 to 10</b> in terms of how helpful it will be for your argument (1 being not helpful, 10 being very helpful)."
         },
         "answers": {
             "1": "Video gaming is not damaging or disruptive to one's life and thus should not be compared to a drug.",
-            "2": "Dopamine levels that are released whilst playing video games are vastly lower than those released whilst taking a drug such as methamphetamine.",
-            "3": "The fact that a pleasurable activity released dopamine is uninformative, as dopamine is released whilst playing video games, taking drugs and whilst partaking in any form of pleasurable activity.",
+            "2": "Dopamine levels that are released while playing video games are vastly lower than those released while taking a drug such as methamphetamine.",
+            "3": "The fact that a pleasurable activity released dopamine is uninformative, as dopamine is released while playing video games, taking drugs and while partaking in any form of pleasurable activity.",
             "4": "The American Journal of Psychiatry has published a study showing that at most 1 percent of video game players might exhibit characteristics of an addiction.",
             "5": "The American Journal of Psychiatry has published a study showing that gambling is more addictive than video games.",
             "6": "The American Journal of Psychiatry has published a study showing that the mental and social heath of the purported video game addicts is no different from individuals who are not addicted to video games.",

@@ -99,11 +99,37 @@
                 </div>
             </div>
 
+            <hr />
+            <hr />
+
+            <div class="row">
+                <h4>Qualitative Feedback:</h4>
+                <div class="well well-lg">
+                    <p>Please use this space to give us any relevant feedback on the above voting formats. Was ranking/selection more difficult, which voting schema do you think will result in the most coherent sub-selection of 5 points out of the given selection (and why)? Did you particularly like or dislike one of the voting formats?</p>
+
+                    <p>Thank you again for your time! It is much appreciated.</p>
+
+                    <textarea id="qualitative_feedback" rows="5" style="width: 100%"></textarea>
+                </div>
+            </div>
+
             <div style="padding-bottom: 10em;">
                 <button type="button" class="btn btn-lg btn-primary" id="submitButton">Submit</button>
             </div>
 
             <script>
+
+//            window.mobileAndTabletcheck = function() {
+//                var check = false;
+//                (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+//                return check;
+//            };
+//
+//            if (window.mobileAndTabletcheck() === true) {
+//                alert("Thanks so much for checking out this survey. Unfortunately, it can only be viewed on a desktop.");
+//                window.location = "http://www.google.com";
+//            }
+
             var time_start = Date.now()
             var time1 = Date.now()
             var time2 = Date.now()
@@ -122,7 +148,7 @@
                 return array;
             }
 
-            function make_rank_question (question_data, question_div, answer_div, order, time) {
+            function make_rank_question (question_data, question_div, answer_div, order) {
 
                 var newDiv = document.createElement( "div" );
                 var description = $(newDiv).append(question_data['question_description']);
@@ -133,6 +159,8 @@
                 var paragraph = $(question_div);
                 paragraph.css('font-size', 'large');
                 paragraph.append(description)
+
+                paragraph.append('<br/><p style="font-size: small">(Drag and drop the options into the order that you believe is best. You can also edit the order number to change order.</i>)</p>')
 
                 var questions = $(answer_div)
 
@@ -149,7 +177,7 @@
                         $(answer_div).empty()
                         make_rank_question(question_data, question_div, answer_div, changed_order)
 
-                        time = Date.now()
+                        time1 = Date.now()
 
                     }
 
@@ -178,11 +206,76 @@
                     col.css('padding', '1px');
                     col.css('padding-right', '5px');
 
-                    var badge =  $(document.createElement("span"));
-                    badge.addClass('badge');
+                    var badge =  $('<input type="number" min="1" max="10" step="1" value="1"/>');
+
+//                    badge.addClass($('<input type="number" min="1" max="10" step="1" value="1"/>'));
+                    $(badge).val(parseInt(i) + 1)
+                    $(badge).attr('current_pos', parseInt(i) + 1)
                     item.data({'order': parseInt(i) + 1})
                     item.data({'value': order[i]})
                     badge.text($(item).data('order'))
+
+                    $(badge).on("mouseup", function(e) {
+
+                        var new_rank = parseInt($(e.target).val())-1
+                        var current_index = parseInt($(e.target).attr('current_pos'))-1
+
+                        if (new_rank < current_index) {
+                            new_rank = current_index + 2
+                            if (new_rank > 10) new_rank = 10
+                            if (new_rank < 1) new_rank = 1
+                            $(e.target).val(new_rank)
+                        } else if (new_rank > current_index) {
+                            new_rank = current_index
+                            if (new_rank > 10) new_rank = 10
+                            if (new_rank < 1) new_rank = 1
+                            $(e.target).val(new_rank)
+                        }
+                    })
+
+                    $(badge).change(function() {
+
+                        var new_rank = parseInt($(this).val())-1
+                        if (new_rank > 9) new_rank = 9
+                        if (new_rank < 0) new_rank = 0
+                        var current_index = parseInt($(this).attr('current_pos'))-1
+
+                        var new_order = []
+
+                        var i = 0
+                        while (i < new_rank) {
+                            if (i !== current_index) {
+                                new_order.push(order[i])
+                            } else {
+                                new_rank += 1
+                            }
+                            i += 1
+                        }
+//                        debugger
+
+                        new_order.push(order[current_index])
+
+                        i = new_rank
+                        while(i < 10){
+                            if (i !== current_index) {
+                                new_order.push(order[i])
+                            }
+                            i += 1
+                        }
+//                        for (var i in order) {
+//                            if (order[i] < new_position) {
+//                                new_order.push(order[i])
+//                            } else {
+//
+//                            }
+//                        }
+
+                        $(question_div).empty()
+                        $(answer_div).empty()
+                        make_rank_question(question_data, question_div, answer_div, new_order)
+
+                        time1 = Date.now()
+                    });
 
                     col.append(badge);
                     span.append(col);
@@ -192,12 +285,9 @@
                     questions.append(item);
 
                 }
-
-                questions.append('<p>(<i>Drag and drop the options into the order that you believe is best</i>)</p>')
-
             }
 
-            function make_select_question (question_data, question_div, answer_div, order, time) {
+            function make_select_question (question_data, question_div, answer_div, order) {
 
                 var newDiv = document.createElement( "div" );
                 var description = $(newDiv).append(question_data['question_description']);
@@ -242,6 +332,7 @@
                     col.css('padding-right', '5px');
 
                     var checkbox =  $('<input type="checkbox" aria-label="...">');
+
                     $(checkbox).data({'value': order[i]});
                     $(checkbox).change(function() {
 
@@ -258,7 +349,7 @@
                             $(questions).find("#over_selection").remove()
                         }
 
-                        time = Date.now()
+                        time2 = Date.now()
                     });
 
                     col.append(checkbox)
@@ -275,90 +366,236 @@
                 }
             }
 
-            var selection1 = Math.floor((Math.random() * 2) + 1);
-            var selection2 = Math.floor((Math.random() * 2) + 1);
-            var selection3 = 2
-            if ((selection1 === 1) && (selection2 === 1)){
-                selection3 = 2
-            }else if (selection1 === 2 && selection2 === 2){
-                selection3 = 1
-            }else{
-                selection3 = Math.floor((Math.random() * 2) + 1);
+            function make_ordinal_question (question_data, question_div, answer_div, order) {
+
+                var newDiv = document.createElement( "div" );
+                var description = $(newDiv).append(question_data['question_description']);
+                description.append(' ');
+                description.append(question_data['question']['number']);
+
+                var paragraph = $(question_div);
+                paragraph.css('font-size', 'large');
+                paragraph.append(description)
+
+                paragraph.append('<br/><p style="font-size: small">(<i>Simply score each point individually out of 10</i>)</p>')
+
+                var questions = $(answer_div)
+
+                var selected = []
+                $(questions).data({'selected' : []})
+                questions.css('margin', '0')
+                questions.css('padding', '0')
+
+                for (var i in order) {
+
+                    var answer = question_data['answers'][order[i]]
+
+                    var item = $(document.createElement( "li" ))
+                    item.css('list-style-type', 'none')
+                    item.css('white-space', 'normal')
+                    item.css('margin', '0')
+                    item.css('padding', '0')
+                    item.css('white-space', 'normal')
+                    item.css('float', 'none');
+                    item.css('padding', '10px');
+                    item.css('width', 'inherit');
+//                    item.css('padding-left', '1.5em');
+                    item.css('font-size', 'medium');
+                    item.css('margin', '1px 5px 5px 1px')
+                    item.css('padding', '2px')
+//                    item.css('padding-left', '1.5em')
+                    var span = $(document.createElement("tr"));
+                    span.addClass("input-group-addon")
+                    span.css('text-align', 'left')
+
+                    var col = $(document.createElement("td"))
+                    col.css('padding', '1px');
+                    col.css('padding-right', '5px');
+
+//                    var checkbox =  $('<input type="checkbox" aria-label="...">');
+                    var checkbox =  $('<input type="number" min="1" max="10" step="1" value="1"/>');
+                    $(checkbox).data({'value': order[i]});
+                    $(checkbox).change(function() {
+//
+//                        var selected = $(questions).find('input:checkbox:checked').map( function() {
+//                            return $(this).data('value');
+//                        }).get()
+//
+//                        $(questions).data({'selected' : selected})
+//
+//                        if (selected.length > 5) {
+//                            $(questions).find("#over_selection").remove()
+//                            $(questions).append('<p id="over_selection" style="color: red"><i>Please select exactly 5 options</i></p>')
+//                        } else {
+//                            $(questions).find("#over_selection").remove()
+//                        }
+//
+                        time3 = Date.now()
+                    });
+
+                    col.append(checkbox)
+
+                    span.append(col)
+                    var text = document.createElement('td');
+                    text.append(answer)
+                    span.append(text)
+                    span.css('white-space', 'normal')
+                    item.append(span)
+                    questions.append(item);
+
+
+                }
             }
 
-            question_mapping = Array.apply(null, {length: 3}).map(Number.call, Number).map(function(x) {return x+1})
+            var selection_mapping = Array.apply(null, {length: 3}).map(Number.call, Number).map(function(x) {return x+1})
+            selection_mapping = shuffleArray(selection_mapping)
+            var selection1 = selection_mapping[0]
+            var selection2 = selection_mapping[1]
+            var selection3 = selection_mapping[2]
+
+//            var selection1 = Math.floor((Math.random() * 2) + 1);
+//            var selection2 = Math.floor((Math.random() * 2) + 1);
+//            var selection3 = 2
+//            if ((selection1 === 1) && (selection2 === 1)){
+//                selection3 = 2
+//            }else if (selection1 === 2 && selection2 === 2){
+//                selection3 = 1
+//            }else{
+//                selection3 = Math.floor((Math.random() * 2) + 1);
+//            }
+
+            var question_mapping = Array.apply(null, {length: 3}).map(Number.call, Number).map(function(x) {return x+1})
             question_mapping = shuffleArray(question_mapping)
-            console.log(question_mapping)
+//            console.log(question_mapping)
 
             $.getJSON("data/questions.json", function(data) {
+
+
 
                 var question1_map = 'question' + question_mapping[0]
                 var order1 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
                 order1 = shuffleArray(order1)
                 var question1 = data[question1_map]
-                if (selection1 == 1){
+                if (selection1 === 1){
                     make_rank_question(question1, "#question1_description", "#question1_content", order1, time1)
-                } else {
+                } else if (selection1 === 2) {
                     make_select_question(question1, "#question1_description", "#question1_content", order1, time1)
+                } else {
+                    make_ordinal_question(question1, "#question1_description", "#question1_content", order1, time1)
                 }
+
+
+
 
                 var question2_map = 'question' + question_mapping[1]
                 var order2 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
                 order2 = shuffleArray(order2)
                 var question2 = data[question2_map]
-                if (selection2 == 1){
+                if (selection2 === 1){
                     make_rank_question(question2, "#question2_description", "#question2_content", order2, time2)
-                } else {
+                } else if (selection2 === 2) {
                     make_select_question(question2, "#question2_description", "#question2_content", order2, time2)
+                } else {
+                    make_ordinal_question(question2, "#question2_description", "#question2_content", order2, time2)
                 }
+
+
 
                 var question3_map = 'question' + question_mapping[2]
                 var order3 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
                 order3 = shuffleArray(order3)
                 var question3 = data[question3_map]
-                if (selection3 == 1){
+                if (selection3 === 1){
                     make_rank_question(question3, "#question3_description", "#question3_content", order3, time3)
-                } else {
+                } else if (selection3 === 2) {
                     make_select_question(question3, "#question3_description", "#question3_content", order3, time3)
+                } else {
+                    make_ordinal_question(question3, "#question3_description", "#question3_content", order3, time3)
                 }
 
             });
 
             $('#submitButton').click( function() {
 
+//                debugger;
                 var ok_flag = 0
                 var question1_data
                 if (selection1 === 1){
                     question1_data = $("#question1_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else {
+                } else if (selection1 === 2){
                     question1_data = $("#question1_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
                     if (question1_data.length !== 5) {
-                        alert('Please make 5 selections for the multiple choice question')
+                        alert('Please make 5 selections for the multiple choice question on Question 1')
+                        ok_flag = 1
+                    }
+                } else {
+                    question1_data = []
+                    var question1_data_ = $("#question1_content").find('input').map( function() { return $(this).val(); }).get()
+                    var question1_order = $("#question1_content").find('input').map( function() { return $(this).data('value'); }).get()
+
+                    for (var i in question1_order) {
+                        question1_data[question1_order[i]] = question1_data_[i]
+                    }
+
+                    if ((question1_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)) {
+                        alert('Please make at least one choice on Question 1')
                         ok_flag = 1
                     }
                 }
+
+
 
                 var question2_data
                 if (selection2 === 1){
                     question2_data = $("#question2_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else {
+                } else if (selection2 === 2){
                     question2_data = $("#question2_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if ((question2_data.length !== 5) && (flag === 0)) {
-                        alert('Please make 5 selections for the multiple choice question')
+                    if ((question2_data.length !== 5) && (ok_flag === 0)) {
+                        alert('Please make 5 selections for the multiple choice question on Question 2')
+                        ok_flag = 1
+                    }
+                } else {
+                    question2_data = []
+                    var question2_data_ = $("#question2_content").find('input').map( function() { return $(this).val(); }).get()
+                    var question2_order = $("#question2_content").find('input').map( function() { return $(this).data('value'); }).get()
+
+                    for (var i in question2_order) {
+                        question2_data[question2_order[i]] = question2_data_[i]
+                    }
+
+                    if ((question2_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
+                        alert('Please make at least one choice on Question 2')
                         ok_flag = 1
                     }
                 }
 
+
+
                 var question3_data
                 if (selection3 === 1){
                     question3_data = $("#question3_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else {
+                } else if (selection3 === 2){
                     question3_data = $("#question3_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if ((question3_data.length !== 5) && (flag === 0)) {
-                        alert('Please make 5 selections for the multiple choice question')
+                    if ((question3_data.length !== 5) && (ok_flag === 0)) {
+                        alert('Please make 5 selections for the multiple choice question on Question 3')
+                        ok_flag = 1
+                    }
+                } else {
+                    question3_data = []
+                    var question3_data_ = $("#question3_content").find('input').map( function() { return $(this).val(); }).get()
+                    var question3_order = $("#question3_content").find('input').map( function() { return $(this).data('value'); }).get()
+
+                    for (var i in question3_order) {
+                        question3_data[question3_order[i]] = question3_data_[i]
+                    }
+
+                    if ((question3_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
+                        alert('Please make at least one choice on Question 3')
                         ok_flag = 1
                     }
                 }
+
+
 
 
                 if (ok_flag !== 1){
@@ -367,9 +604,9 @@
                     data['question' + question_mapping[0] + '_id'] = question_mapping[0];
                     data['question' + question_mapping[1] + '_id'] = question_mapping[1];
                     data['question' + question_mapping[2] + '_id'] = question_mapping[2];
-                    data['question' + question_mapping[0] + '_time'] = time1;
-                    data['question' + question_mapping[1] + '_time'] = time2;
-                    data['question' + question_mapping[2] + '_time'] = time3;
+                    data['question' + selection_mapping[0] + '_time'] = time1;
+                    data['question' + selection_mapping[1] + '_time'] = time2;
+                    data['question' + selection_mapping[2] + '_time'] = time3;
                     data['question' + question_mapping[0] + '_selections'] = question1_data
                     data['question' + question_mapping[1] + '_selections'] = question2_data
                     data['question' + question_mapping[2] + '_selections'] = question3_data
@@ -378,9 +615,11 @@
                     data['question' + question_mapping[2] + '_type'] = selection3
                     data['time_start'] = time_start
                     data['time_end'] = Date.now()
+                    data['qualitative_feedback'] = $('#qualitative_feedback').val();
 
                     console.log(data)
-
+//                    debugger;
+//
                     $.ajax ({
                         type: "POST",
                         url: 'https://54w56om3u3.execute-api.us-east-1.amazonaws.com/test',
