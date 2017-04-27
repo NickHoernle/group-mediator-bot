@@ -105,6 +105,9 @@
 
             <script>
             var time_start = Date.now()
+            var time1 = Date.now()
+            var time2 = Date.now()
+            var time3 = Date.now()
             /**
              * Randomize array element order in-place.
              * Using Durstenfeld shuffle algorithm.
@@ -119,7 +122,7 @@
                 return array;
             }
 
-            function make_rank_question (question_data, question_div, answer_div, order) {
+            function make_rank_question (question_data, question_div, answer_div, order, time) {
 
                 var newDiv = document.createElement( "div" );
                 var description = $(newDiv).append(question_data['question_description']);
@@ -145,6 +148,8 @@
                         $(question_div).empty()
                         $(answer_div).empty()
                         make_rank_question(question_data, question_div, answer_div, changed_order)
+
+                        time = Date.now()
 
                     }
 
@@ -188,11 +193,11 @@
 
                 }
 
-//                questions.append('<p>(<i>Drag and drop the options into the best order</i>)</p>')
+                questions.append('<p>(<i>Drag and drop the options into the order that you believe is best</i>)</p>')
 
             }
 
-            function make_select_question (question_data, question_div, answer_div, order) {
+            function make_select_question (question_data, question_div, answer_div, order, time) {
 
                 var newDiv = document.createElement( "div" );
                 var description = $(newDiv).append(question_data['question_description']);
@@ -207,6 +212,8 @@
 
                 var selected = []
                 $(questions).data({'selected' : []})
+                questions.css('margin', '0')
+                questions.css('padding', '0')
 
                 for (var i in order) {
 
@@ -221,11 +228,11 @@
                     item.css('float', 'none');
                     item.css('padding', '10px');
                     item.css('width', 'inherit');
-                    item.css('padding-left', '1.5em');
+//                    item.css('padding-left', '1.5em');
                     item.css('font-size', 'medium');
                     item.css('margin', '1px 5px 5px 1px')
                     item.css('padding', '2px')
-                    item.css('padding-left', '1.5em')
+//                    item.css('padding-left', '1.5em')
                     var span = $(document.createElement("tr"));
                     span.addClass("input-group-addon")
                     span.css('text-align', 'left')
@@ -250,6 +257,8 @@
                         } else {
                             $(questions).find("#over_selection").remove()
                         }
+
+                        time = Date.now()
                     });
 
                     col.append(checkbox)
@@ -288,9 +297,9 @@
                 order1 = shuffleArray(order1)
                 var question1 = data[question1_map]
                 if (selection1 == 1){
-                    make_rank_question(question1, "#question1_description", "#question1_content", order1)
+                    make_rank_question(question1, "#question1_description", "#question1_content", order1, time1)
                 } else {
-                    make_select_question(question1, "#question1_description", "#question1_content", order1)
+                    make_select_question(question1, "#question1_description", "#question1_content", order1, time1)
                 }
 
                 var question2_map = 'question' + question_mapping[1]
@@ -298,9 +307,9 @@
                 order2 = shuffleArray(order2)
                 var question2 = data[question2_map]
                 if (selection2 == 1){
-                    make_rank_question(question2, "#question2_description", "#question2_content", order2)
+                    make_rank_question(question2, "#question2_description", "#question2_content", order2, time2)
                 } else {
-                    make_select_question(question2, "#question2_description", "#question2_content", order2)
+                    make_select_question(question2, "#question2_description", "#question2_content", order2, time2)
                 }
 
                 var question3_map = 'question' + question_mapping[2]
@@ -308,9 +317,9 @@
                 order3 = shuffleArray(order3)
                 var question3 = data[question3_map]
                 if (selection3 == 1){
-                    make_rank_question(question3, "#question3_description", "#question3_content", order3)
+                    make_rank_question(question3, "#question3_description", "#question3_content", order3, time3)
                 } else {
-                    make_select_question(question3, "#question3_description", "#question3_content", order3)
+                    make_select_question(question3, "#question3_description", "#question3_content", order3, time3)
                 }
 
             });
@@ -358,6 +367,9 @@
                     data['question' + question_mapping[0] + '_id'] = question_mapping[0];
                     data['question' + question_mapping[1] + '_id'] = question_mapping[1];
                     data['question' + question_mapping[2] + '_id'] = question_mapping[2];
+                    data['question' + question_mapping[0] + '_time'] = time1;
+                    data['question' + question_mapping[1] + '_time'] = time2;
+                    data['question' + question_mapping[2] + '_time'] = time3;
                     data['question' + question_mapping[0] + '_selections'] = question1_data
                     data['question' + question_mapping[1] + '_selections'] = question2_data
                     data['question' + question_mapping[2] + '_selections'] = question3_data
