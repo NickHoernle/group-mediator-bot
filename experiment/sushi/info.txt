@@ -1,0 +1,31 @@
+Name: Sushi Data
+
+Abbreviation: sushi
+
+Extension: ED
+
+Series Number: 00014
+
+Path: election/sushi
+
+Description: <p>This dataset contains the results of a series of surveys conducted by <a href="http://www.kamishima.net/sushi/">Toshihiro Kamishima</a> asking 5000 individuals for their preferences about various kinds of sushi.  There are three different datasets that were elicited in different ways: <ul><li> <b>Element Series 00000001</b> contains 10 complete strict rank orders of 10 different kinds of sushi.</li> <li> <b>Element Series 00000002</b> contains individual's strict rank ordering of 100 different kinds of sushi (candidates). </li> <li> <b>Element Series 00000003</b> contains individual's scoring of sushi items on a scale of 0-4, with repeats allowed.</li> </ul>  This dataset contains 14 files in total including soc, soi, toi, and toc files.<br><br> <b>Note that the dataset was incorrectly converted, it has been fixed as of Jan 2016, please re-download.</b></p> <p> Due to licence issues we require that you go through Toshihiro Kamishima website to obtain the datafiles and observe the following licence terms: <ul><li> We involve Toshihiro Kamishima, his colleagues, and their employers. You involve the user of this data and his/her colleagues, and their employers. We are NOT liable for any damages or losses, arising out of or related to your use or inability to use this data set. You can use this data set for any research purpose. You must not redistribute without our permission. We would like you to acknowledge the use of these program codes or data sets in publications by citing one of our related publications, if you could.</li></ul></p>
+
+Required Citations: None
+
+Selected Studies: Nantonac Collaborative Filtering: Recommendation Based on Order Responses; T. Kamishima; Proceedings of the 9th International Conference on Knowledge Discovery and Data Mining (KDD); 2003 | A Survey and Empirical Comparison of Object Ranking Methods; T. Kamishima, H. Kazawa, and S. Akaho; In J. Furnkranz and E. Hullermeier, editors, Preference Learning; 2010 
+
+description,status,file_name
+Sushi 10 Rank,Induced,ED-00014-00000001.tog
+Sushi 10 Rank,Induced,ED-00014-00000001.pwg
+Sushi 10 Rank,Original,ED-00014-00000001.soc
+Sushi 10 Rank,Induced,ED-00014-00000001.wmg
+Sushi 100 Rank,Induced,ED-00014-00000002.mjg
+Sushi 100 Rank,Imbued,ED-00014-00000002.toc
+Sushi 100 Rank,Induced,ED-00014-00000002.pwg
+Sushi 100 Rank,Original,ED-00014-00000002.soi
+Sushi 100 Rank,Induced,ED-00014-00000002.wmg
+Sushi 100 Score,Induced,ED-00014-00000003.mjg
+Sushi 100 Score,Imbued,ED-00014-00000003.toc
+Sushi 100 Score,Original,ED-00014-00000003.toi
+Sushi 100 Score,Induced,ED-00014-00000003.pwg
+Sushi 100 Score,Induced,ED-00014-00000003.wmg
