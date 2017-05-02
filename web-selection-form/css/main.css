@@ -96,20 +96,19 @@ textarea {
    ========================================================================== */
 
 .well.well-lg {
-    background: #f7f7f7;
+    background: #fcfcfc;
 }
 
-/*input[type=number]::-webkit-outer-spin-button,*/
-/*input[type=number]::-webkit-inner-spin-button {*/
-    /*-webkit-appearance: none;*/
-    /*margin: 0;*/
-/*}*/
-
-/*input[type=number] {*/
-    /*-moz-appearance:textfield;*/
-/*}*/
+.question_selection {
+    cursor: pointer;
+}
 
 
+#loading-indicator {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
 
 
 

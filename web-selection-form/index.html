@@ -53,6 +53,8 @@
                 <h1>Crowdsourced Subset Selection</h1>
             </div>
 
+            <div class="alert alert-danger" role="alert">Thank you for your interest. Unfortunately, we are no longer accepting responses for this survey.</div>
+
             <br />
             <p style="font-size: medium">
                 Firstly, thank you for completing this questionnaire. Our names are Sophie and Nick, we are graduate students at Harvard in the School of Engineering and Applied Sciences. We are completing a small study on the role of Artificial Intelligence in a group and/or team environment and we'd really appreciate your input to help us collect some empirical data.
@@ -117,8 +119,9 @@
             </div>
 
             <div style="padding-bottom: 10em;">
-                <button type="button" class="btn btn-lg btn-primary" id="submitButton">Submit</button>
+                <button type="button" class="btn btn-lg btn-primary disabled" id="submitButton">Submit</button>
             </div>
+        </div>
 
             <script>
 
@@ -473,7 +476,7 @@
 
             $.getJSON("data/questions.json", function(data) {
 
-
+                console.log(data)
 
                 var question1_map = 'question' + question_mapping[0]
                 var order1 = Array.apply(null, {length: 10}).map(Number.call, Number).map(function(x) {return x+1})
@@ -521,125 +524,125 @@
             $('#submitButton').click( function() {
 
 //                debugger;
-                var ok_flag = 0
-                var question1_data
-                if (selection1 === 1){
-                    question1_data = $("#question1_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else if (selection1 === 2){
-                    question1_data = $("#question1_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if (question1_data.length !== 5) {
-                        alert('Please make 5 selections for the multiple choice question on Question 1')
-                        ok_flag = 1
-                    }
-                } else {
-                    question1_data = []
-                    var question1_data_ = $("#question1_content").find('input').map( function() { return $(this).val(); }).get()
-                    var question1_order = $("#question1_content").find('input').map( function() { return $(this).data('value'); }).get()
-
-                    for (var i in question1_order) {
-                        question1_data[question1_order[i]] = question1_data_[i]
-                    }
-
-                    if ((question1_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)) {
-                        alert('Please make at least one choice on Question 1')
-                        ok_flag = 1
-                    }
-                }
-
-
-
-                var question2_data
-                if (selection2 === 1){
-                    question2_data = $("#question2_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else if (selection2 === 2){
-                    question2_data = $("#question2_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if ((question2_data.length !== 5) && (ok_flag === 0)) {
-                        alert('Please make 5 selections for the multiple choice question on Question 2')
-                        ok_flag = 1
-                    }
-                } else {
-                    question2_data = []
-                    var question2_data_ = $("#question2_content").find('input').map( function() { return $(this).val(); }).get()
-                    var question2_order = $("#question2_content").find('input').map( function() { return $(this).data('value'); }).get()
-
-                    for (var i in question2_order) {
-                        question2_data[question2_order[i]] = question2_data_[i]
-                    }
-
-                    if ((question2_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
-                        alert('Please make at least one choice on Question 2')
-                        ok_flag = 1
-                    }
-                }
-
-
-
-                var question3_data
-                if (selection3 === 1){
-                    question3_data = $("#question3_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
-                } else if (selection3 === 2){
-                    question3_data = $("#question3_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
-                    if ((question3_data.length !== 5) && (ok_flag === 0)) {
-                        alert('Please make 5 selections for the multiple choice question on Question 3')
-                        ok_flag = 1
-                    }
-                } else {
-                    question3_data = []
-                    var question3_data_ = $("#question3_content").find('input').map( function() { return $(this).val(); }).get()
-                    var question3_order = $("#question3_content").find('input').map( function() { return $(this).data('value'); }).get()
-
-                    for (var i in question3_order) {
-                        question3_data[question3_order[i]] = question3_data_[i]
-                    }
-
-                    if ((question3_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
-                        alert('Please make at least one choice on Question 3')
-                        ok_flag = 1
-                    }
-                }
-
-
-
-
-                if (ok_flag !== 1){
-
-                    var data = {}
-                    data['question' + question_mapping[0] + '_id'] = question_mapping[0];
-                    data['question' + question_mapping[1] + '_id'] = question_mapping[1];
-                    data['question' + question_mapping[2] + '_id'] = question_mapping[2];
-                    data['question' + selection_mapping[0] + '_time'] = time1;
-                    data['question' + selection_mapping[1] + '_time'] = time2;
-                    data['question' + selection_mapping[2] + '_time'] = time3;
-                    data['question' + question_mapping[0] + '_selections'] = question1_data
-                    data['question' + question_mapping[1] + '_selections'] = question2_data
-                    data['question' + question_mapping[2] + '_selections'] = question3_data
-                    data['question' + question_mapping[0] + '_type'] = selection1
-                    data['question' + question_mapping[1] + '_type'] = selection2
-                    data['question' + question_mapping[2] + '_type'] = selection3
-                    data['time_start'] = time_start
-                    data['time_end'] = Date.now()
-                    data['qualitative_feedback'] = $('#qualitative_feedback').val();
-
-                    console.log(data)
-//                    debugger;
+//                var ok_flag = 0
+//                var question1_data
+//                if (selection1 === 1){
+//                    question1_data = $("#question1_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+//                } else if (selection1 === 2){
+//                    question1_data = $("#question1_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+//                    if (question1_data.length !== 5) {
+//                        alert('Please make 5 selections for the multiple choice question on Question 1')
+//                        ok_flag = 1
+//                    }
+//                } else {
+//                    question1_data = []
+//                    var question1_data_ = $("#question1_content").find('input').map( function() { return $(this).val(); }).get()
+//                    var question1_order = $("#question1_content").find('input').map( function() { return $(this).data('value'); }).get()
 //
-                    $.ajax ({
-                        type: "POST",
-                        url: 'https://54w56om3u3.execute-api.us-east-1.amazonaws.com/test',
-                        dataType: 'application/json',
-                        async: false,
-                        data: JSON.stringify(data),
-                        success: function () {
-
-                            alert("Thanks a lot! We appreciate it.");
-                            window.location = "http://www.google.com";
-                        },
-                        error: function() {
-                            alert("Thanks a lot! We appreciate it.");
-                            window.location = "http://www.google.com";
-                        }
-                    })
-                }
+//                    for (var i in question1_order) {
+//                        question1_data[question1_order[i]] = question1_data_[i]
+//                    }
+//
+//                    if ((question1_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)) {
+//                        alert('Please make at least one choice on Question 1')
+//                        ok_flag = 1
+//                    }
+//                }
+//
+//
+//
+//                var question2_data
+//                if (selection2 === 1){
+//                    question2_data = $("#question2_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+//                } else if (selection2 === 2){
+//                    question2_data = $("#question2_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+//                    if ((question2_data.length !== 5) && (ok_flag === 0)) {
+//                        alert('Please make 5 selections for the multiple choice question on Question 2')
+//                        ok_flag = 1
+//                    }
+//                } else {
+//                    question2_data = []
+//                    var question2_data_ = $("#question2_content").find('input').map( function() { return $(this).val(); }).get()
+//                    var question2_order = $("#question2_content").find('input').map( function() { return $(this).data('value'); }).get()
+//
+//                    for (var i in question2_order) {
+//                        question2_data[question2_order[i]] = question2_data_[i]
+//                    }
+//
+//                    if ((question2_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
+//                        alert('Please make at least one choice on Question 2')
+//                        ok_flag = 1
+//                    }
+//                }
+//
+//
+//
+//                var question3_data
+//                if (selection3 === 1){
+//                    question3_data = $("#question3_content").find('li').map(function(i, item){ return $(item).data('value'); }).get()
+//                } else if (selection3 === 2){
+//                    question3_data = $("#question3_content").find('input:checkbox:checked').map( function() { return $(this).data('value'); }).get()
+//                    if ((question3_data.length !== 5) && (ok_flag === 0)) {
+//                        alert('Please make 5 selections for the multiple choice question on Question 3')
+//                        ok_flag = 1
+//                    }
+//                } else {
+//                    question3_data = []
+//                    var question3_data_ = $("#question3_content").find('input').map( function() { return $(this).val(); }).get()
+//                    var question3_order = $("#question3_content").find('input').map( function() { return $(this).data('value'); }).get()
+//
+//                    for (var i in question3_order) {
+//                        question3_data[question3_order[i]] = question3_data_[i]
+//                    }
+//
+//                    if ((question3_data.reduce(function(a, b) { return parseInt(a) + parseInt(b); }, 0) === 10)&& (ok_flag === 0)) {
+//                        alert('Please make at least one choice on Question 3')
+//                        ok_flag = 1
+//                    }
+//                }
+//
+//
+//
+//
+//                if (ok_flag !== 1){
+//
+//                    var data = {}
+//                    data['question' + question_mapping[0] + '_id'] = question_mapping[0];
+//                    data['question' + question_mapping[1] + '_id'] = question_mapping[1];
+//                    data['question' + question_mapping[2] + '_id'] = question_mapping[2];
+//                    data['question' + selection_mapping[0] + '_time'] = time1;
+//                    data['question' + selection_mapping[1] + '_time'] = time2;
+//                    data['question' + selection_mapping[2] + '_time'] = time3;
+//                    data['question' + question_mapping[0] + '_selections'] = question1_data
+//                    data['question' + question_mapping[1] + '_selections'] = question2_data
+//                    data['question' + question_mapping[2] + '_selections'] = question3_data
+//                    data['question' + question_mapping[0] + '_type'] = selection1
+//                    data['question' + question_mapping[1] + '_type'] = selection2
+//                    data['question' + question_mapping[2] + '_type'] = selection3
+//                    data['time_start'] = time_start
+//                    data['time_end'] = Date.now()
+//                    data['qualitative_feedback'] = $('#qualitative_feedback').val();
+//
+//                    console.log(data)
+////                    debugger;
+////
+//                    $.ajax ({
+//                        type: "POST",
+//                        url: 'https://54w56om3u3.execute-api.us-east-1.amazonaws.com/test',
+//                        dataType: 'application/json',
+//                        async: false,
+//                        data: JSON.stringify(data),
+//                        success: function () {
+//
+//                            alert("Thanks a lot! We appreciate it.");
+//                            window.location = "http://www.google.com";
+//                        },
+//                        error: function() {
+//                            alert("Thanks a lot! We appreciate it.");
+//                            window.location = "http://www.google.com";
+//                        }
+//                    })
+//                }
             });
 
         </script>
