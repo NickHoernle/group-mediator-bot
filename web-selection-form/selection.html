@@ -154,7 +154,7 @@
 
         element.append(topic_description)
 //
-        for (var answer in answers['selections']) {
+        for (var answer in shuffleArray(answers['selections'])) {
 
             var width = element.width()/(answers['selections'].length)
             var column = $(document.createElement( "td" ))
