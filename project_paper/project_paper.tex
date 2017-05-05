@@ -52,6 +52,12 @@
 \usepackage[margin=1.25in]{geometry}
 \usepackage{bbm}
 \usepackage{float}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{cleveref}
+\usepackage{csquotes}
+
 \usepackage{setspace}
 \onehalfspacing
 \usepackage{hyperref}
@@ -62,6 +68,9 @@
     urlcolor=cyan,
 }
 \urlstyle{same}
+
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple}
+\renewcommand\thesubfigure{(\alph{subfigure})}
 
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
@@ -132,7 +141,7 @@
 
 
 \begin{abstract}
-%% Text of abstract
+Social choice theory, providing tools for making joint decisions in multiagent systems is becoming popular for tasks such as group recommendation systems, information retrieval, and crowdsourcing \citep{moulin2016handbook}. We pose a scenario where a crowd is asked to select a subset of information points regarding a topic and we show that theoretically optimal voting rules are not necessarily applicable to this setting.
 
 \end{abstract}
 \end{frontmatter}
@@ -142,12 +151,11 @@
 %% main text
 \section{Introduction}
 \label{sec:introduction}
-
-Communication is a costly resource in human-human and human-computer interaction [references]. Given a medical setting, \citet{amir2015care} report that study participants could not review necessary information in a timely manner, nullifying the effect of obtaining complete and correct information. Similar problems arise in the crowdsourcing setting. \citet{hahn2016knowledge} show that crowdsourcing vendors consistently struggle to balance the amount of information needed convey to a worker to equip the worker to excel at his/her job without overburdening the process with too much information. An added complication is that in many settings, the ideal contextual information that is shared is subjective. Therefore, multiple parties have competing interests in having their contributions addressed. One possible solution is to allow for a single contributor or an outside controller to make these subjective decisions. However, experiences with content generators like Wikipedia with a strong hierarchical or dictatorial leadership \citep{benkler2015peer} have shown that the resulting content is often suboptimal from the viewpoint of the whole and heavily skewed to conform to the opinion(s) of the decision-maker(s). \citet{schwartz2015design} stresses that those situations in which group members have different information and the actions of individuals are interdependent are the most critical to be collectively assessed.
+There are interesting settings where humans collaborate with each other and with computers to generate documents (e.g. Wikipedia) \citep{hahn2016knowledge} \citep{kittur2013future}, create taxonomies\citep{chilton2013cascade} and create document summaries \citep{khosla2013large}. Moreover, we have studied the importance of modeling and understanding the cost of communication in multi-agent systems. Given a medical setting, \citet{amir2015care} report that study participants could not review necessary information in a timely manner, nullifying the effect of obtaining complete and correct information. Similar problems arise in the crowdsourcing setting. \citet{hahn2016knowledge} show that crowdsourcing vendors consistently struggle to balance the amount of information needed convey to a worker to equip the worker with the necessary information to excel at his/her job without overburdening the process with too much information. An added complication is that in many settings, the ideal contextual information that is shared is subjective. Therefore, multiple parties have competing interests in having their contributions addressed. One possible solution is to allow for a single contributor or an outside controller to make these subjective decisions. However, experiences with content generators like Wikipedia with a strong hierarchical or dictatorial leadership \citep{benkler2015peer} have shown that the resulting content is often suboptimal from the viewpoint of the whole and heavily skewed to conform to the opinion(s) of the decision-maker(s). \citet{schwartz2015design} stresses that those situations in which group members have different information and the actions of individuals are interdependent are the most critical to be collectively assessed.
 
 % \subsection{Motivation for Investigation}
 % \label{sec:motivation}
-Under these conditions, we see a strong case for adopting social budgeting techniques to crowdsource contextual points. As shown in \citet{boutilier2015optimal}, if we assume adopt a utilitarian framework in which we hope to maximize the satisfaction of all group members, properly chosen voting rules can ensure that we minimize the maximum difference between the optimal possible satisfaction to all members and that selected by the voting rule in expectation (the regret), whereas it is clear that for a dictatorial selection this could be trivially equal to the worst case if the size of the alternative set is larger than two times the size of the set of options to be selected. 
+Under these conditions, we see a strong case for adopting social budgeting techniques to crowdsource contextual points. \citet{boutilier2015optimal} shows that if we assume adopt a utilitarian framework in which we hope to maximize the satisfaction of all group members, properly chosen voting rules can ensure that we minimize the maximum difference between the optimal possible satisfaction to all members and that selected by the voting rule in expectation (the regret), whereas it is clear that for a dictatorial selection this could be trivially equal to the worst case if the size of the alternative set is larger than two times the size of the set of options to be selected. 
 
 In particular, we will seek to test the effectiveness of the subset selection algorithm generated by \citet{caragiannis2017subset}, which approaches the problem as a variation on the maximin rule. In particular, the authors show that it is possible to derive an explicit utility function which maximizes regret while maintaining consistency with the votes, leading to the following expression for maximum regret for a subset selection $T$:
 \begin{equation}\label{eq:max_regret}
@@ -162,9 +170,9 @@ We seek the set $T$ that minimizes this quantity.
 \textrm{argmin}_{T \in A_k} \textrm{max}_{S \in A_k} \sum_{i=1}^{n} \frac{\mathbbm{1}[S \succ_{\sigma_i}T]}{\sigma_i(S)}
 \end{equation}
 
-Shah et al. show that this can be solved through an ILP with $n � m$ variables and $n � m^{2} $ + $n\choose m$ constraints, where $n$ is the number of voters and $m$ is the number of alternatives available.
+\citet{caragiannis2017subset} show that this can be solved through an ILP with $n � m$ variables and $n � m^{2} + {n\choose m}$ constraints, where $n$ is the number of voters and $m$ is the number of alternatives available.
 
-For comparison, we also use plurality/knapsack voting, which has been used in real-world participatory budgeting programs (likely in part because of its computational simplicity and ease of understanding) \citep{goel2015knapsack} and is shown in Shah et al. to have empirical regret approaching that of the subset selection algorithm above for subset sizes greater than three, which will be the case in our experiment and should be generally true for problems of this nature.
+For comparison, we also use plurality/knapsack voting, which has been used in real-world participatory budgeting programs (likely in part because of its computational simplicity and ease of understanding) \citep{goel2015knapsack} and is shown by \citet{caragiannis2017subset} to have empirical regret approaching that of the subset selection algorithm above for subset sizes greater than three, which will be the case in our experiment and should be generally true for problems of this nature.
 
 We apply these different voting rules to the problem of subset selection and conclude that in practice the success of a voting rule may depend heavily on the difficulty (cognitively or subjectively) one has in comparing options.
 %Definition 1 (Comparing Sets). Given a ranking ? ? L and an alternative a ? A, recall that ?(a) denotes the position of a in ?. More generally, for a set S ? A let ?(S) = mina?S ?(a). For sets S,T ? A, we say T ?? S if ?(T) < ?(S), i.e., if there exists an alternative in T that is preferred to every alternative in S in ?.
@@ -182,35 +190,100 @@ We apply these different voting rules to the problem of subset selection and con
 %\citep{fatima2004agenda} present a view of negotiations where agents all benefit by reaching an agreement but all have conflicting ideas over how certain tasks should be executed. In a similar way, agents in \citet{amir2015care} medical setting may have differing opinions on the best and most important treatment plans that require discussion, but reaching a feasible agreement in advance... 
 
 \section{Experiment Design}
+\label{sec:experiment}
 
 % A description of the experiment that was run; enough detail should be provided   
 % that the reader could reasonably duplicate the experiment. Results should not be 
 % reported in this section.
-Three voting rules are compared to evaluate the success of the subset selection. To test the voting rules we pose a setting where participants are requested to select a number of points that may be relevant to a given topic. The authors compiled a set of 10 supporting points from popular \textit{New York Times} opinion pieces, and used a web-based survey form to allow participants to make subset selections. The topics were presented in a `debate prompt' style and the participants were asked to select the points that would contribute the most value to the presented argument. We also allowed participants to provide feedback on the subset selection styles they most and least enjoyed.
+Three voting rules are compared to evaluate the success of the subset selection. To test the voting rules we pose a setting where participants are requested to select a number of points that may be relevant to a given topic. We compiled a set of 10 supporting points from popular \textit{New York Times} opinion pieces, and used a web-based survey form to allow participants to make subset selections. The topics were presented in a `debate prompt' style and the participants were asked to select the points that would contribute the most value to the presented argument. We also allowed participants to provide feedback on the subset selection styles they most and least enjoyed (\ref{appendix:qual_feedback}).
 
-\par The interface \footnote{Accessed at: \url{http://nick-and-sophie-harvard-cs280r.s3-website-us-east-1.amazonaws.com/index.html}} was designed to present participants with thee question (on three different articles) and each question would display a different subset selection protocol. The different sections consisted of
+\par The interface \footnote{Accessed at: \url{http://nick-and-sophie-harvard-cs280r.s3-website-us-east-1.amazonaws.com/index.html}} was designed to present participants with thee question (on three different articles) and each question displays a different subset selection protocol. The different selection methods include:
 \begin{itemize}
 \item `ranking' selection by dragging and dropping alternatives into the correct order from most useful to least useful for the given argument. 
 \item `plurality' selection, where check-boxes are selected until 5 selections were made.
 \item `cardinal' selection where each point was given a score out of 10 independently of the others.
 \end{itemize}
 
-The study consisted of 37 respondents and 111 subset choices over the three different voting rules. We solve \ref{eq:min_regret} using integer linear programming as described in \citet{caragiannis2017subset} to aggregate the ranking and ordinal results into an optimal subset. We induced a ranking over the cardinal results to obtain ranked values to use in the subset selection algorithm, breaking ties at random. For the plurality results, we selected the subset greedily using a majority rule approach. Selected subsets included four points each.
+The study consisted of 37 respondents and 111 subset choices over the three different voting rules. We solve equation \ref{eq:min_regret} using integer linear programming as described by \citet{caragiannis2017subset} to aggregate the ranking and cardinal results into an optimal subset. We induced a ranking over the cardinal results to obtain ranked values to use in the subset selection algorithm, breaking ties at random. For the plurality results, we selected the subset greedily using a majority rule approach. Selected subsets included four points each.
 
 Finally, selected subsets were presented to a different group of 15 participants. These participants were simply asked to select the most relevant subset, also given the same topic. This data was also collected through a web-based survey \footnote{Accessed at: \url{http://nick-and-sophie-harvard-cs280r.s3-website-us-east-1.amazonaws.com}}.
 
 
 \section{Results}
-%A report of the results of the experiments, and their significance.
-\subsection{Intermediate Results}
-Points selected by the various methods showed a generally low degree of overlap. For two of the topics, there was one point present in all three subsets, and for all of the topics, at least two points appeared in multiple subsets. Only one pair of options differed by only a single point.  
 
-Qualitative feedback on the voting methods was converted to a simple numerical form by assigning a 1 for every user who said they liked a given voting method, 0 for a neutral or missing response, and -1 for a negative response. The results show that users in general disliked the ranking method, were fairly neutral about the rating method, and preferred the knapsack selection. While the preference for a cardinal over an ordinal method runs counter to generally accepted voting design principles, we believe this may have to do with the number of points that must be considered for any given decision as well as some degree of user frustration at inability to assign ties in the ranking. In particular, to properly rank any adjacent pair of points, the user must consider the value of both at once. In assigning a cardinal ranking, the user can focus only on determining the value of a single point.
+% \subsection{Intermediate Results}
+% Points selected by the various methods showed a generally low degree of overlap. For two of the topics, there was one point present in all three subsets, and for all of the topics, at least two points appeared in multiple subsets. Only one pair of options differed by only a single point.  
+
+% Qualitative feedback on the voting methods was converted to a simple numerical form by assigning a 1 for every user who said they liked a given voting method, 0 for a neutral or missing response, and -1 for a negative response. The results show that users in general disliked the ranking method, were fairly neutral about the rating method, and preferred the knapsack selection. While the preference for a cardinal over an ordinal method runs counter to generally accepted voting design principles, we believe this may have to do with the number of points that must be considered for any given decision as well as some degree of user frustration at inability to assign ties in the ranking. In particular, to properly rank any adjacent pair of points, the user must consider the value of both at once. In assigning a cardinal ranking, the user can focus only on determining the value of a single point.
 
 %%insert chart
 
-\subsection{Final Results}
-Plurality voting produced the most preferred results in all three topics, although for topic 1 rating was also tied for the most number of votes. However, for topic 3 rating achieved the fewest votes of any available selection. The success of simple plurality voting in our experiment over more complicated minimum regret methods leads to a discussion of the appropriateness of minimum regret in our setting. 
+% \subsection{Final Results}
+% Plurality voting produced the most preferred results in all three topics, although for topic 1 rating was also tied for the most number of votes. However, for topic 3 rating achieved the fewest votes of any available selection. The success of simple plurality voting in our experiment over more complicated minimum regret methods leads to a discussion of the appropriateness of minimum regret in our setting. 
+
+%%histogram
+
+% The histogram of the results of this analysis shows a strong preference for bundling contextually similar points, even though those points are not displayed together in the experiment. In general, \citet{moulin2016handbook} suggests that in fact there are very few domains in which the separability assumption can be expected to hold. In our experiment in particular, it seems likely that human nature pushes respondents to choose a cohesive argument.That is, one in which the arguments made flow well together.
+
+% More generally, even if the assumption of separability were to hold, it is not clear that utilitarian minimum regret should be the objective of choice in content aggregation. Minimum regret may in fact be a better aggregation function for meeting environments, when it is important that all participants have their needs addressed. However, for other content-based applications such as the construction of an argument as above or the composition of a Wikipedia-style article, perhaps it could make more sense to cater to the majority at the expense of minority opinions, depending on the target audience.
+%% what happens to quality of outcome when assumptions do not hold
+%% generality of approach
+
+The results here, while indicative of trends are not statistically significant and thus we do not make significant claims about our conclusions. Rather, we use the results to inform interesting questions and to pose further work in this area.
+
+The initial results show a large amount of noise and uncertainty in the selections. Figure \ref{fig:q3raw} shows the score that each answer receives for the third topic \footnote{See \ref{appendix:question_topics} for more details on the specific topics} in the question set under the different voting rules. [\textit{Some useful reference discuss how this uncertainty is expected}]. Simply from the raw data there does not appear to be a large amount of correlation among the voting formats. Table \ref{tbl:voting_aggregation} shows the summary of the selected subsets by the voting aggregation rules explained in \ref{sec:experiment}. Points selected by the various methods showed a generally low degree of overlap. For two of the topics, there was one point present in all three subsets, and for all of the topics, at least two points appeared in multiple subsets. Only one pair of options differed by only a single point.  
+
+\begin{figure}
+\includegraphics[width=\textwidth]{images/question3_raw_results}
+\caption{Bar chart of the score each answer point receives under the different voting rules}
+\label{fig:q3raw}
+\end{figure}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{ l | c | c | c }
+ & Topic 1 & Topic 2 & Topic 3 \\
+ \hline
+ \textbf{Ranking}&              $[2, 3, 6, 7]$ & $[2, 3, 7, 10]$ & $[3, 5, 7, 10]$ \\
+ \textbf{Cardinal Score}&       $[1, 2, 7, 8]$ & $[4, 7, 8, 10]$ & $[3, 4, 6, 8]$ \\
+ \textbf{Plurality Selection}&   $[1, 5, 7, 9]$& $[1, 2, 3, 8]$  & $[3, 4, 6, 10]$ \\
+\end{tabular}
+\caption{Table showing the selected subset for the different topics for the different voting rules}
+\label{tbl:voting_aggregation}
+\end{center}
+\end{table}
+
+A different set of voters was asked to vote on qualitatively the best subset, figure \ref{fig:manyresults}\subref{fig:final_res} shows that the subset from plurality was selected as the best subset for Topics 2 and 3. It was tied as the best subset for Topic 1. Moreover, for Topics 1 and 2, the `Ranking' subset is chosen as the best option the least often.
+
+\begin{figure}
+\centering
+\begin{subfigure}[m]{0.25\textwidth}
+		\center\includegraphics[height=2.5cm]{images/final_results}
+		\caption{Bar chart showing the final selected subset for each question for each voting rule}
+		\label{fig:final_res}
+\end{subfigure}\hfill
+\begin{subfigure}[m]{0.25\textwidth}
+		\center\includegraphics[height=2.5cm]{images/qualitatve_feedback_responses}
+		\caption{Chart showing the qualitative sentiment towards the different voting rules}
+		\label{fig:qualitative_feedback}
+\end{subfigure}\hfill
+\begin{subfigure}[m]{0.25\textwidth}
+		\center\includegraphics[height=2.5cm]{images/time_to_complete_raw}
+		\caption{Time to complete the different voting sections}
+		\label{fig:time_to_complete}
+\end{subfigure}
+\caption{}
+\label{fig:manyresults}
+\end{figure}
+
+The time that it took the participants to complete each voting section was recorded. For Topics 2 and 3, the Ranking voting section took on average 1 minute 30 seconds more time to complete. However, the results on Topic 1 are inconclusive and standard deviation on the time to complete the voting sections is large. 
+
+Finally, we turn to the qualitative results that we collected in the initial survey. Here we specifically asked participants to provide feedback on the difficulty of the voting rule, and which voting rule they preferred. An example of some of this feedback is as follows:
+\begin{quote}
+``Ranking is the most difficult. I prefer the format that lets me choose on a scale from 1-10 how strong I think the argument is.''
+\end{quote}
+
+All the qualitative feedback is provided in \ref{appendix:qual_feedback}. We parsed the qualitative feedback to understand the sentiment towards the different voting rules. When a specific voting format was mentioned positively or negatively, this was recorded with a $1$ or $-1$ respectively. If the voting rule was not mentioned or was mentioned in a neutral setting the score was recorded as 0. Figure \ref{fig:manyresults}\subref{fig:qualitative_feedback} demonstrates a trend where `Ranking' was disliked more than it was liked `Plurality' was liked more than it was disliked and `Cardinal Score' shows a neutral to positive sentiment.
 
 \section{Discussion}
 The results from \citet{caragiannis2017subset} suggest that for a subset of size four, minimum regret should generally provide the lowest upper bound on the regret of participants. That is, it is better in the case where we assume the utility function with highest possible distortion compatible with the selections. However, plurality voting has a very similar upper bound for a subset size of four and may have superior properties in other considerations, as we've seen above. We believe the success of plurality voting in our experiment has to do with two factors.
@@ -219,13 +292,6 @@ First, the upper bounds assume the worst case separable utility function compati
 
 To investigate the presence of this effect in our collected data, we ran a window of length three over every person`s choices, calculating the pairwise distance between all combinations of the three in that window in terms of their ids in our original problem formulation. Because the points were extracted in order from the original opinion pieces (although points are displayed in random order to respondents), numerically close ids correspond to physical and contextual closeness in the original argument. From this, we get an idea of if points that are similar typically get placed with a similar ranking. 
 
-%%histogram
-
-The histogram of the results of this analysis shows a strong preference for bundling contextually similar points, even though those points are not displayed together in the experiment. In general, \citet{moulin2016handbook} suggests that in fact there are very few domains in which the separability assumption can be expected to hold. In our experiment in particular, it seems likely that human nature pushes respondents to choose a cohesive argument.That is, one in which the arguments made flow well together.
-
-More generally, even if the assumption of separability were to hold, it is not clear that utilitarian minimum regret should be the objective of choice in content aggregation. Minimum regret may in fact be a better aggregation function for meeting environments, when it is important that all participants have their needs addressed. However, for other content-based applications such as the construction of an argument as above or the composition of a Wikipedia-style article, perhaps it could make more sense to cater to the majority at the expense of minority opinions, depending on the target audience.
-%% what happens to quality of outcome when assumptions do not hold
-%% generality of approach
 
 \subsection{Cognitive Load}
 Second, our qualitative feedback suggests that knapsack/plurality selection is significantly easier for respondents. This leads us to consider the possible effects of cognitive load on the various voting algorithms. In fact,  \citet{caragiannis2017subset} explicitly mentions that the analysis has yet to investigate effects of cognitive load although the authors stress in other works, such as \citet{benade2017preference} that the entire point of voting mechanisms is to reduce the unacceptable cognitive load of eliciting a full utility function. 
@@ -255,8 +321,12 @@ The results are reported below for subsets of size 1 to 9 and profile sets of 10
 
 We find that in general, plurality voting is much more robust to errors in voting than minimum regret. Then, based on our findings, we would expect that the additional cognitive load of ranking induces more errors in voting and that the algorithm is less robust to these errors.
 
+
 \subsection{Further Considerations}
 \citet{moulin2016handbook}  mentions four main considerations in evaluation of a voting rule. Communication cost, generality, and quality of the outcome have already been addressed above, in the sections concerning cognitive load, separability, and robustness, respectively. We now also touch briefly on the criterion of computational cost.
+
+
+% Note that plurality in many cases receives widespread critique as the winner in a voting rule may actually be highly unpopular \citep{moulin2016handbook}, however in the case of subset selection, the distance between different voting options may be small enough to neglect this downfall.
 
 \subsection{Citations}
 
@@ -337,6 +407,12 @@ Discussion of previous important, similar work in the area with comparison to th
 
 \bibliographystyle{elsarticle-num-names}
 \bibliography{bibliography}
+
+\appendix
+\section{Qualitative Feedback from Survey}\label{appendix:qual_feedback}
+
+% \appendix
+\section{Question Topics}\label{appendix:question_topics}
 
 \end{document}
 
