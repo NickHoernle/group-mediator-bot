@@ -311,11 +311,13 @@ We find that in general, plurality voting is much more robust to errors in votin
 %% what happens to quality of outcome when assumptions do not hold
 %% generality of approach
 
-  Describes the insights that can be taken away from the work reported in the paper.
+With respect to the general field of vote aggregation, our work suggests that assumptions about cognitive load and separability used throughout the literature may be unreasonably favorable. Care should be taken to ensure that any assumptions critical to the evaluation of experiments hold in practice as well as in principle.
+
+Considering content aggregation specifically, we find that the ideal choice of utility and aggregation functions is likely environment-specific. In particular, even if the assumption of separability were to hold, it is not clear that utilitarian minimum regret should be the objective of choice in our content aggregation problem. Minimum regret may in fact be a better aggregation function for environments in which it is important that all participants have their needs addressed. However, for other content-based applications such as the construction of an argument as above or the composition of a Wikipedia-style article, perhaps it could make more sense to cater to the majority at the expense of minority opinions, depending on the target audience.
+
 
 \section {Future work}
 %% explore contexts in which separability is/is not an issue?
-  Suggests extensions or challenges raised by the project.
 
 % Note that plurality in many cases receives widespread critique as the winner in a voting rule may actually be highly unpopular \citep{moulin2016handbook}, however in the case of subset selection, the distance between different voting options may be small enough to neglect this downfall.
 
