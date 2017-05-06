@@ -102,7 +102,7 @@
 %% \biboptions{longnamesfirst,comma}
 
 % \biboptions{}
-\setlength{\parskip}{1em}
+% \setlength{\parskip}{1em}
 
 \journal{cs280r - Final Project Report}
 
@@ -143,7 +143,7 @@
 
 \begin{abstract}
 \textit{
-Social choice theory, providing tools for making joint decisions in multiagent systems is becoming popular for tasks such as group recommendation systems, information retrieval, and crowdsourcing \citep{moulin2016handbook}. We pose a scenario where a crowd is asked to select a subset of information points regarding a topic and we show that theoretically optimal voting rules are not necessarily applicable to this setting. Rather, we suggest different voting rules place varying amounts of cognitive load on the participants, introducing noise into the votes of the participants and ultimately confusing the results. Our conclusion is that cognitive load should be included as a modeling variable for voting rules that involve subset selection.}
+Social choice theory, providing tools for making joint decisions in multiagent systems is becoming popular for tasks such as group recommendation systems, information retrieval, and crowdsourcing \citep{moulin2016handbook}. We pose a scenario where a crowd is asked to select a subset of information points regarding a topic and we show that theoretically optimal voting rules are not necessarily applicable to this setting. Rather, we suggest different voting rules place varying amounts of cognitive load on the participants, introducing noise into the votes of the participants and ultimately confounding the results. Our conclusion is that cognitive load should be included as a modeling variable for voting rules that involve subset selection.}
 
 \end{abstract}
 \end{frontmatter}
@@ -153,27 +153,25 @@ Social choice theory, providing tools for making joint decisions in multiagent s
 %% main text
 \section{Introduction}
 \label{sec:introduction}
-There are interesting settings where humans collaborate with each other and with computers to generate content, including documents (e.g. Wikipedia) \citep{hahn2016knowledge,kittur2013future}, taxonomies \citep{chilton2013cascade} and summaries \citep{khosla2013large}. In multi-agent systems settings where qualitative content is being created or used it is important to consider the cost of communication. Given a medical setting, \citet{amir2015care} report that study participants could not review necessary information in a timely manner, nullifying the effect of obtaining complete and correct information from others. \citet{hahn2016knowledge} show that crowdsourcing vendors consistently struggle to balance the amount of information needed convey to a worker to equip the worker with the necessary information to excel at his/her job without overburdening the process with too much information. An added complication is that in many settings, the ideal contextual information that is shared is subjective. Therefore, multiple parties have competing interests in having their contributions addressed. One possible solution is to allow for a single contributor or an outside controller to make these subjective decisions. However, experiences with content generators with a strong hierarchical or dictatorial leadership (e.g. Wikipedia \citeauthor{benkler2015peer}) have shown that the resulting content is often suboptimal from the viewpoint of the whole and heavily skewed to conform to the opinion(s) of the decision-maker(s). \citet{schwartz2015design} stresses that those situations in which group members have different information and the actions of individuals are interdependent are the most critical to be collectively assessed.
+There are interesting settings where humans collaborate with each other and with computers to generate content, including documents (e.g. Wikipedia) \citep{hahn2016knowledge,kittur2013future}, taxonomies \citep{chilton2013cascade} and summaries \citep{khosla2013large}. In multi-agent systems settings where qualitative content is being created or used, it is important to consider the cost of communication. Given a medical setting, \citet{amir2015care} report that study participants could not review necessary information in a timely manner, nullifying the effect of obtaining complete and correct information from others. \citet{hahn2016knowledge} show that crowdsourcing vendors consistently struggle to balance the amount of information needed convey to a worker to fully equip the worker to excel at his/her job without overburdening the process with too much information. An added complication is that in many settings, the ideal contextual information that is shared is subjective. Therefore, multiple parties have competing interests in having their contributions addressed. One possible solution is to allow for a single contributor or an outside controller to make these subjective decisions. However, experiences with content generators with a strong hierarchical or dictatorial leadership \citep{benkler2015peer} have shown that the resulting content is often suboptimal from the viewpoint of the whole and heavily skewed to conform to the opinion(s) of the decision-maker(s). \citet{schwartz2015design} stresses that those situations in which group members have different information and the actions of individuals are interdependent are the most critical to be collectively assessed.
 
 % \subsection{Motivation for Investigation}
 % \label{sec:motivation}
-Under these conditions, we see a strong case for adopting social budgeting techniques to crowdsource contextual points. 
+Under these conditions, we see a strong case for adopting social budgeting techniques to crowdsource contextual points. Our ultimate goal is to select an ideal set of relevant contextual information while reducing the communication and collaboration overheads that may otherwise be necessary.
 
 \section{Related Work}
-\citet{boutilier2015optimal} shows that if we assume adopt a utilitarian framework in which we hope to maximize the satisfaction of all group members, properly chosen voting rules can ensure that we minimize the maximum difference between the optimal possible satisfaction to all members and that selected by the voting rule in expectation (the regret). It is clear that for a dictatorial selection this could be trivially equal to the worst case if the size of the alternative set is larger than two times the size of the set of options to be selected. In particular, we will seek to test the effectiveness of the subset selection algorithm generated by \citet{caragiannis2017subset}, which approaches the problem as a variation on the maximin rule. In particular, the authors show that it is possible to derive an explicit utility function which maximizes regret while maintaining consistency with the votes. We use the following expression for maximum regret for a subset selection $T$:
+\citet{boutilier2015optimal} show that if we assume adopt a utilitarian framework in which we hope to maximize the satisfaction of all group members, properly chosen voting rules can ensure that we minimize the maximum difference between the optimal possible satisfaction to all members and that selected by the voting rule in expectation (the regret). It is clear that for a dictatorial selection, this could be trivially equal to the worst case if the size of the alternative set is larger than two times the size of the set of options to be selected. In particular, we will seek to test the effectiveness of the subset selection algorithm generated by \citet{caragiannis2017subset}, which approaches the problem as a variation on the maximin rule. In particular, the authors show that it is possible to derive an explicit utility function which maximizes regret while maintaining consistency with the votes. We use the following expression for maximum regret for a subset selection $T$:
 \begin{equation}\label{eq:max_regret}
 \textrm{max}_{S \in A_k} \sum_{i=1}^{n} \frac{\mathbbm{1}[S \succ_{\sigma_i}T]}{\sigma_i(S)}
 \end{equation}
-Where $S \succ_{\sigma_i}T$ indicates that there is no alternative in T preferred to every alternative in S given the utility function $\sigma_i$, and $\sigma_i(S)$ is the ordinal ranking of the best alternative in set $S$ in the ranking determined by the utility function $\sigma_i$. Intuitively, any term in this maximization captures the lost satisfaction to the voters of not having the given set $S_i$ chosen rather than $T$, weighted by how much he or she liked his or her best option in $S_i$. This will lead to a greater penalization for sets $T$ that do not give many participants at least one of their top choices.
-
-We seek the set $T$ that minimizes this quantity.
+Where $S \succ_{\sigma_i}T$ indicates that there is no alternative in T preferred to every alternative in S given the utility function $\sigma_i$. $\sigma_i(S)$ is the ordinal ranking of the best alternative in set $S$ in the ranking determined by the utility function $\sigma_i$. Intuitively, any term in this maximization captures the lost satisfaction to the voters of not having the given set $S_i$ chosen rather than $T$, weighted by how much he or she liked his or her best option in $S_i$. This will lead to a greater penalization for sets $T$ that do not give many participants at least one of their top choices. We seek the set $T$ that minimizes this quantity.
 \begin{equation}\label{eq:min_regret}
 \textrm{argmin}_{T \in A_k} \textrm{max}_{S \in A_k} \sum_{i=1}^{n} \frac{\mathbbm{1}[S \succ_{\sigma_i}T]}{\sigma_i(S)}
 \end{equation}
 
 \citet{caragiannis2017subset} show that this can be solved through an integer linear program (ILP) with $n · m$ variables and $n · m^{2} + {n\choose m}$ constraints, where $n$ is the number of voters and $m$ is the number of alternatives available.
 
-For comparison, we also use plurality/knapsack voting, which has been used in real-world participatory budgeting programs (likely in part because of its computational simplicity and ease of understanding \citeauthor{goel2015knapsack}) and is shown by \citet{caragiannis2017subset} to have empirical regret approaching that of the subset selection algorithm above for subset sizes greater than three, which will be the case in our experiment and should be generally true for problems of this nature.
+For comparison, we also use plurality/knapsack voting, which has been used in real-world participatory budgeting programs (likely in part because of its computational simplicity and ease of understanding \citeauthor{goel2015knapsack}). Moreover, plurality is shown by \citet{caragiannis2017subset} to have empirical regret approaching that of the subset selection algorithm above for subset sizes greater than three, which will be the case in our experiment and should be generally true for problems of this nature.
 
 We apply these different voting rules to the problem of subset selection and conclude that in practice the success of a voting rule may depend heavily on the difficulty (cognitively or subjectively) one has in comparing options.
 %Definition 1 (Comparing Sets). Given a ranking ? ? L and an alternative a ? A, recall that ?(a) denotes the position of a in ?. More generally, for a set S ? A let ?(S) = mina?S ?(a). For sets S,T ? A, we say T ?? S if ?(T) < ?(S), i.e., if there exists an alternative in T that is preferred to every alternative in S in ?.
@@ -213,7 +211,7 @@ The results here, while indicative of trends are mostly not statistically signif
 The initial results show a large amount of noise and uncertainty in the selections. Figure \ref{fig:q3raw} shows the score that each answer receives for the third topic \footnote{See \ref{appendix:question_topics} for more details on the specific topics} in the question set under the different voting rules. [\textit{Some useful reference discuss how this uncertainty is expected}]. Simply from the raw data there does not appear to be a large amount of correlation among the voting formats. Table \ref{tbl:voting_aggregation} shows the summary of the selected subsets by the voting aggregation rules explained in \ref{sec:experiment}. Points selected by the various methods showed a generally low degree of overlap. For two of the topics, there was one point present in all three subsets, and for all of the topics, at least two points appeared in multiple subsets. Only one pair of options differed by only a single point.  
 
 \begin{figure}
-\includegraphics[width=\textwidth, height=4cm]{images/question3_raw_results}
+\includegraphics[width=\textwidth, height=3.5cm]{images/question3_raw_results}
 \caption{Bar chart of the score each answer point receives under the different voting rules.}
 \label{fig:q3raw}
 \end{figure}
@@ -272,7 +270,7 @@ First, the upper bounds assume the worst case separable utility function compati
 To investigate the presence of this effect in our collected data, we ran a window of length three over every person`s choices, calculating the pairwise distance between all combinations of the three in that window in terms of their ids in our original problem formulation. Because the points were extracted in order from the original opinion pieces (although points are displayed in random order to respondents), numerically close ids correspond to physical and contextual closeness in the original argument. From this, we get an idea of if points that are similar typically get placed with a similar ranking. Figure \ref{fig:pairwise_distance} shows a strong preference for bundling contextually similar points, even though those points are not displayed together in the experiment. In general, \citet{moulin2016handbook} suggests that in fact there are very few domains in which the separability assumption can be expected to hold. In our experiment in particular, it seems likely that human nature pushes respondents to choose a cohesive argument. That is, one in which the arguments made flow well together. The high frequency of a distance of `1' in the figure \ref{fig:pairwise_distance}, corresponding to users selecting points that semantically occurred next to each other in the original article, is significant with a p-value less than [\textit{TODO}].
 
 \begin{figure}
-\includegraphics[width=\textwidth, height=4cm]{images/pairwise_distance}
+\includegraphics[width=\textwidth, height=3.5cm]{images/pairwise_distance}
 \caption{Counts of distances of points in original article when selected in the top or bottom 5 selections.}
 \label{fig:pairwise_distance}
 \end{figure}
@@ -290,13 +288,13 @@ To set up the experiment, we take the Sushi dataset mentioned above and calculat
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[keepaspectratio=true,scale=0.35]{images/robustness_n10}
+  \includegraphics[height=3.5cm]{images/robustness_n10}
   \caption{Robustness with 10 voters and 10 choices}
   \label{fig:sub1}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[keepaspectratio=true,scale=0.35]{images/robustness_n20}
+  \includegraphics[height=3.5cm]{images/robustness_n20}
 \caption{Robustness with 20 voters and 10 choices}\label{fig:sub2}
 \end{minipage}
 \end{figure}
